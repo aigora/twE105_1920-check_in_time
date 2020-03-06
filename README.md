@@ -5,6 +5,7 @@ comienzo a su jornada laboral y gestione los datos de todas las entradas de todo
 ## Integrantes del equipo
 
 Jorge Espí Gutiérrez. jorgeespigutierrez.
+Nicolás Castro Garcia. nicoascastrogarcia.
 
 Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
 
