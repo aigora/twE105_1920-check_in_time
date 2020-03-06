@@ -1,11 +1,15 @@
 # Título del trabajo
 
-Descripción breve del proyecto a realizar (2-3 frases).
-
+El objetivo principal de este trabajo es desarrollar un programa que deje constancia del momento en que cada empleado de una empresa da 
+comienzo a su jornada laboral y gestione los datos de todas las entradas de todos los empleados.
 ## Integrantes del equipo
+
+Jorge Espí Gutiérrez. jorgeespigutierrez.
 
 Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
 
 ## Objetivos del trabajo
 
-Lista de los objetivos que se persiguen con el trabajo propuesto.
+Almacenar la información de todos los empleados (Datos personales, horario de entrada y de salida).
+Registrar y almacenar su hora de entrada y de salida asociados a cada día de trabajo.
+Detectar irregularidades, faltas y/o retrasos recurrentes.
