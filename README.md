@@ -6,7 +6,7 @@ comienzo a su jornada laboral y gestione los datos de todas las entradas de todo
 
 -Jorge Espí Gutiérrez. jorgeespigutierrez.  
 -Nicolás Castro Garcia. nicoascastrogarcia.  
--Abel Domínguez Valladolid.RedBaronUPM.
+-Abel Domínguez Valladolid. RedBaronUPM.
 
 
 ## Objetivos del trabajo
