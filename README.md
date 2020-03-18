@@ -1,4 +1,4 @@
-# Título del trabajo
+# Check in time
 
 El objetivo principal de este trabajo es desarrollar un programa que deje constancia del momento en que cada empleado de una empresa da 
 comienzo a su jornada laboral y gestione los datos de todas las entradas de todos los empleados.
