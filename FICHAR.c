@@ -20,11 +20,11 @@ int main()
 	int opcion;//variable que almacena la opcion elegida por el usuario 
 	do//Se ejecuta el menu principal una vez y mientras la opcion que el usuario elija no sea correcta
 	{
-	printf("	MENU PRINCIPAL");//Se muestra el menu principal y las diferentes opciones .
-	printf("\nPulse 1 para fichar.");
-	printf("\nPulse 2 para agregar un empleado.");//Luego poner que haga falta un código para las labores de gerente
-	printf("\nPulse 3 para consultar los datos de hoy.");
-	printf("\nPulse 4 para consultar los datos de esta semana.\n");
+	printf("	MENU PRINCIPAL\n");//Se muestra el menu principal y las diferentes opciones .
+	printf("\n- Pulse 1 para fichar.");
+	printf("\n- Pulse 2 para agregar un empleado.");//Luego poner que haga falta un código para las labores de gerente
+	printf("\n- Pulse 3 para consultar los datos de hoy.");
+	printf("\n- Pulse 4 para consultar los datos de esta semana.\n\n");
 	scanf("%d", &opcion);// se guarda la opcion elegida por el usuario en una variable
 	switch (opcion)//en funcion de la opcion elegida se realizan las distintas opciones
 	{
