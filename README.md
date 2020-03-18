@@ -8,7 +8,6 @@ Jorge Espí Gutiérrez. jorgeespigutierrez.
 Nicolás Castro Garcia. nicoascastrogarcia.
 Abel Domínguez Valladolid.RedBaronUPM.
 
-Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
 
 ## Objetivos del trabajo
 
