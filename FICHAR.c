@@ -1,11 +1,62 @@
 #include <stdio.h>
+struct empleado{
+char nombre[50];
+char apellido1[50];	
+char apellido2[50];
+int edad;
+int identificador;
+};
 void fichar()//funcion activada por el usuario cuando elige la opcion fichar.
 {
 	printf("\n Funcion fichar");
 }
 void agr_emp()//funcion activada por el usuario cuando elige la opcion agregar empleado.
 {
-	printf("\n Funcion agregar empleado");
+	FILE * pf = fopen("pruebas.txt", "r");
+if (pf == NULL)
+{
+	struct empleado nuevo;
+	pf = fopen("pruebas.txt", "w");
+	fprintf(pf,"	LISTA DE EMPLEADOS:");
+	printf("\nIntroduzca el nombre del primer empleado: 	");
+	scanf("%s", nuevo.nombre);
+	printf("\nIntroduzca su primer apellido:	");
+	scanf("%s", nuevo.apellido1);
+	printf("\nIntroduzca su segundo apellido:	");
+	scanf("%s", nuevo.apellido2);
+	printf("Introduzca su edad:	");
+	scanf("%d", &nuevo.edad);
+	printf("Introduzca su numero de identificacion:	");
+	scanf("%d", &nuevo.identificador);	
+	fprintf(pf,"\nNombre: %s", nuevo.nombre);
+	fprintf(pf,"	Primer apellido: %s", nuevo.apellido1);
+	fprintf(pf,"	Segundo apellido: %s", nuevo.apellido2);
+	fprintf(pf,"	Edad: %d", nuevo.edad);
+	fprintf(pf,"	Identificador: %d", nuevo.identificador);
+    fclose(pf); // Cerramos fichero
+}
+else
+{
+	struct empleado nuevo;
+	FILE *pf = fopen("pruebas.txt","a");
+	printf("\nIntroduzca el nombre del nuevo empleado: 	");
+	scanf("%s", nuevo.nombre);
+	printf("\nIntroduzca su primer apellido:	");
+	scanf("%s", nuevo.apellido1);
+	printf("\nIntroduzca su segundo apellido:	");
+	scanf("%s", nuevo.apellido2);
+	printf("Introduzca su edad:	");
+	scanf("%d", &nuevo.edad);
+	printf("Introduzca su numero de identificacion:	");
+	scanf("%d", &nuevo.identificador);	
+	fprintf(pf,"\nNombre: %s", nuevo.nombre);
+	fprintf(pf,"	Primer apellido: %s", nuevo.apellido1);
+	fprintf(pf,"	Segundo apellido: %s", nuevo.apellido2);
+	fprintf(pf,"	Edad: %d", nuevo.edad);
+	fprintf(pf,"	Identificador: %d", nuevo.identificador);
+	fclose(pf);
+	
+}
 }
 void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
 {
