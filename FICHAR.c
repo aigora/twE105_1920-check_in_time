@@ -64,6 +64,13 @@ void agr_emp()//funcion activada por el usuario cuando elige la opcion agregar e
 		while (m!=0);//Hasta que el usuario no elija la opcion de salir, sigue añadiendo empleados.
 	}
 }
+void list_emp()//funcion activada por el usuario cuando elige la opcion lista de empleados
+{
+FILE *pf = fopen("pruebas.txt","r");
+printf("\nNombre\t\tApellidos\t\tEdad\t\tN de identificacion\n");
+printf()
+
+}
 void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
 {
 	printf("\n Funcion consultar hoy");
@@ -80,8 +87,9 @@ int main()
 	printf("	MENU PRINCIPAL\n");//Se muestra el menu principal y las diferentes opciones .
 	printf("\n- Pulse 1 para fichar.");
 	printf("\n- Pulse 2 para agregar un empleado.");//Luego poner que haga falta un código para las labores de gerente
-	printf("\n- Pulse 3 para consultar los datos de hoy.");
-	printf("\n- Pulse 4 para consultar los datos de esta semana.\n\n");
+	printf("\n- Pulse 3 para ver la lista de empleados.");
+	printf("\n- Pulse 4 para consultar los datos de hoy.");
+	printf("\n- Pulse 5 para consultar los datos de esta semana.\n\n");
 	scanf("%d", &opcion);// se guarda la opcion elegida por el usuario en una variable
 	switch (opcion)//en funcion de la opcion elegida se realizan las distintas opciones
 	{
@@ -92,9 +100,12 @@ int main()
 			agr_emp ();
 			break;
 		case 3:
-			con_hoy();
+			list_emp ();
 			break;
 		case 4:
+			con_hoy();
+			break;
+		case 5:
 			con_sem();
 			break;
 		default://si la opcion elegida por el usuario no está recogida entre las que se les ofrece, se le informa
