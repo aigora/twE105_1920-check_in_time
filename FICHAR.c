@@ -4,7 +4,7 @@ char nombre[50];
 char apellido1[50];	
 char apellido2[50];
 int edad;
-int identificador;
+char identificador[3];
 };
 void fichar()//funcion activada por el usuario cuando elige la opcion fichar.
 {
@@ -25,15 +25,15 @@ void agr_emp()//funcion activada por el usuario cuando elige la opcion agregar e
 		scanf("%s", nuevo.apellido1);
 		printf("\nIntroduzca su segundo apellido:	");
 		scanf("%s", nuevo.apellido2);
-		printf("Introduzca su edad:	");
+		printf("\nIntroduzca su edad:	");
 		scanf("%d", &nuevo.edad);
-		printf("Introduzca su numero de identificacion:	");
-		scanf("%d", &nuevo.identificador);	
-		fprintf(pf,"\nNombre: %s", nuevo.nombre);//Se escriben todos los datos del empleado en una misma línea
-		fprintf(pf,"	Primer apellido: %s", nuevo.apellido1);
-		fprintf(pf,"	Segundo apellido: %s", nuevo.apellido2);
-		fprintf(pf,"	Edad: %d", nuevo.edad);
-		fprintf(pf,"	Identificador: %d", nuevo.identificador);
+		printf("\nIntroduzca su numero de identificacion:	");
+		scanf("%s", &nuevo.identificador);	
+		fprintf(pf,"%s , ", nuevo.nombre);//se almacenan todos los datos de ese empleado en una única línea
+		fprintf(pf,"%s , ", nuevo.apellido1);
+		fprintf(pf,"%s , ", nuevo.apellido2);
+		fprintf(pf,"%d , ", nuevo.edad);
+		fprintf(pf,"%s ;", nuevo.identificador);
 	    fclose(pf); // Cerramos fichero
 	}
 	else//en caso de que el archivo ya exista
@@ -42,23 +42,23 @@ void agr_emp()//funcion activada por el usuario cuando elige la opcion agregar e
 		{
 			struct empleado nuevo;
 			FILE *pf = fopen("pruebas.txt","a");//Se abre para añadir los datos de nuevos empleados
-			printf("\nIntroduzca el nombre del nuevo empleado: 	");//se le solicitan los datos del nuevo empleado al usuario
+			printf("\nIntroduzca el nombre del nuevo empleado:  	 ");//se le solicitan los datos del nuevo empleado al usuario
 			scanf("%s", nuevo.nombre);
 			printf("\nIntroduzca su primer apellido:	");
 			scanf("%s", nuevo.apellido1);
-			printf("\nIntroduzca su segundo apellido:	");
+			printf("\nIntroduzca su segundo apellido:  	 ");
 			scanf("%s", nuevo.apellido2);
 			printf("Introduzca su edad:	");
 			scanf("%d", &nuevo.edad);
 			printf("Introduzca su numero de identificacion:	");
-			scanf("%d", &nuevo.identificador);	
-			fprintf(pf,"\nNombre: %s", nuevo.nombre);//se almacenan todos los datos de ese empleado en una única línea
-			fprintf(pf,"	Primer apellido: %s", nuevo.apellido1);
-			fprintf(pf,"	Segundo apellido: %s", nuevo.apellido2);
-			fprintf(pf,"	Edad: %d", nuevo.edad);
-			fprintf(pf,"	Identificador: %d", nuevo.identificador);
+			scanf("%s", &nuevo.identificador);	
+			fprintf(pf,"%s , ", nuevo.nombre);//se almacenan todos los datos de ese empleado en una única línea
+			fprintf(pf,"%s , ", nuevo.apellido1);
+			fprintf(pf,"%s , ", nuevo.apellido2);
+			fprintf(pf,"%d , ", nuevo.edad);
+			fprintf(pf,"%s ;", nuevo.identificador);
 			fclose(pf);// Cerramos fichero
-			printf("\n Pulse 1 para añadir un nuevo empleado o 0 para salir");
+			printf("\n Pulse 1 para añadir un nuevo empleado o 0 para salir:\t");
 			scanf("%i",&m);
 		}
 		while (m!=0);//Hasta que el usuario no elija la opcion de salir, sigue añadiendo empleados.
@@ -67,9 +67,14 @@ void agr_emp()//funcion activada por el usuario cuando elige la opcion agregar e
 void list_emp()//funcion activada por el usuario cuando elige la opcion lista de empleados
 {
 FILE *pf = fopen("pruebas.txt","r");
-printf("\nNombre\t\tApellidos\t\tEdad\t\tN de identificacion\n");
-printf()
-
+int valores[1],  i;
+char palabras[3], identificador[1];
+printf("\nNombre           Apellidos\t\t\tEdad\t\tN de identificacion\n\n");
+while(fscanf(pf, "%s, %s, %s, %i, %s;", &palabras[0+i], &palabras[1+i], &palabras[2+i], &valores[0+i], &identificador[0+i] )!=EOF ){
+i=0;
+printf("%s\t\t %s %s\t\t        \t%i  \t%s\n", &palabras[0+i], &palabras[1+i], &palabras[2+i], &valores[0+i],&valores[1+i] );
+i=+5;
+}
 }
 void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
 {
@@ -89,7 +94,8 @@ int main()
 	printf("\n- Pulse 2 para agregar un empleado.");//Luego poner que haga falta un código para las labores de gerente
 	printf("\n- Pulse 3 para ver la lista de empleados.");
 	printf("\n- Pulse 4 para consultar los datos de hoy.");
-	printf("\n- Pulse 5 para consultar los datos de esta semana.\n\n");
+	printf("\n- Pulse 5 para consultar los datos de esta semana.");
+	printf("\n- Pulse 6 para salir.\n\n");
 	scanf("%d", &opcion);// se guarda la opcion elegida por el usuario en una variable
 	switch (opcion)//en funcion de la opcion elegida se realizan las distintas opciones
 	{
@@ -108,11 +114,14 @@ int main()
 		case 5:
 			con_sem();
 			break;
+		case 6:
+			printf("\nSaliendo de la aplicacion");
+			return 0;
 		default://si la opcion elegida por el usuario no está recogida entre las que se les ofrece, se le informa
 			printf("El numero introducido no es correcto.\n");
 	}
 	}
-	while(opcion!=4 && opcion!=3 && opcion != 2 && opcion != 1);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menú principal
+	while(opcion!=6 && opcion!=5 && opcion!=4 && opcion!=3 && opcion != 2 && opcion != 1);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menú principal
 	return 0;
 }
 
