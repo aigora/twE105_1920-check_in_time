@@ -1,9 +1,12 @@
 #include <stdio.h>
+#include <string.h>
+
+
 struct empleado{//Estructura que almacena los datos de cada empleado. Icluye nombre, apellidos, edad y un numero identificador de la empresa
 char nombre[50];
 char apellido1[50];	
 char apellido2[50];
-int edad;
+char edad[2];
 char identificador[3];
 };
 void fichar()//funcion activada por el usuario cuando elige la opcion fichar.
@@ -26,14 +29,14 @@ void agr_emp()//funcion activada por el usuario cuando elige la opcion agregar e
 		printf("\nIntroduzca su segundo apellido:	");
 		scanf("%s", nuevo.apellido2);
 		printf("\nIntroduzca su edad:	");
-		scanf("%d", &nuevo.edad);
+		scanf("%s", &nuevo.edad);
 		printf("\nIntroduzca su numero de identificacion:	");
 		scanf("%s", &nuevo.identificador);	
-		fprintf(pf,"%s , ", nuevo.nombre);//se almacenan todos los datos de ese empleado en una única línea
-		fprintf(pf,"%s , ", nuevo.apellido1);
-		fprintf(pf,"%s , ", nuevo.apellido2);
-		fprintf(pf,"%d , ", nuevo.edad);
-		fprintf(pf,"%s ;", nuevo.identificador);
+		fprintf(pf,"%s ", nuevo.nombre);//se almacenan todos los datos de ese empleado en una única línea
+		fprintf(pf,"%s ", nuevo.apellido1);
+		fprintf(pf,"%s ", nuevo.apellido2);
+		fprintf(pf,"%s ", nuevo.edad);
+		fprintf(pf,"%s \n", nuevo.identificador);
 	    fclose(pf); // Cerramos fichero
 	}
 	else//en caso de que el archivo ya exista
@@ -49,15 +52,15 @@ void agr_emp()//funcion activada por el usuario cuando elige la opcion agregar e
 			printf("\nIntroduzca su segundo apellido:  	 ");
 			scanf("%s", nuevo.apellido2);
 			printf("Introduzca su edad:	");
-			scanf("%d", &nuevo.edad);
+			scanf("%s", &nuevo.edad);
 			printf("Introduzca su numero de identificacion:	");
 			scanf("%s", &nuevo.identificador);	
-			fprintf(pf,"%s , ", nuevo.nombre);//se almacenan todos los datos de ese empleado en una única línea
-			fprintf(pf,"%s , ", nuevo.apellido1);
-			fprintf(pf,"%s , ", nuevo.apellido2);
-			fprintf(pf,"%d , ", nuevo.edad);
-			fprintf(pf,"%s ;", nuevo.identificador);
-			fclose(pf);// Cerramos fichero
+			fprintf(pf,"%s ", nuevo.nombre);//se almacenan todos los datos de ese empleado en una única línea
+			fprintf(pf,"%s ", nuevo.apellido1);
+			fprintf(pf,"%s ", nuevo.apellido2);
+			fprintf(pf,"%s ", nuevo.edad);
+			fprintf(pf,"%s \n", nuevo.identificador);
+	    	fclose(pf); // Cerramos fichero
 			printf("\n Pulse 1 para añadir un nuevo empleado o 0 para salir:\t");
 			scanf("%i",&m);
 		}
@@ -67,13 +70,17 @@ void agr_emp()//funcion activada por el usuario cuando elige la opcion agregar e
 void list_emp()//funcion activada por el usuario cuando elige la opcion lista de empleados
 {
 FILE *pf = fopen("pruebas.txt","r");
-int valores[1],  i;
-char palabras[3], identificador[1];
-printf("\nNombre           Apellidos\t\t\tEdad\t\tN de identificacion\n\n");
-while(fscanf(pf, "%s, %s, %s, %i, %s;", &palabras[0+i], &palabras[1+i], &palabras[2+i], &valores[0+i], &identificador[0+i] )!=EOF ){
-i=0;
-printf("%s\t\t %s %s\t\t        \t%i  \t%s\n", &palabras[0+i], &palabras[1+i], &palabras[2+i], &valores[0+i],&valores[1+i] );
-i=+5;
+int  i=0, s=5, veces=0, v;
+char nombre[30], apellido1[30], apellido2[30], Apellidos[60], Edad[2], Identificador[3];
+printf("\nNombre\t\tApellidos\t\t\tEdad\tNº de identificacion\n\n");
+while(fscanf(pf, "%20s %20s %20s %20s %20s", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
+strcpy(Apellidos, apellido1); 
+strcat(Apellidos, " "); 
+strcat(Apellidos, apellido2); 
+
+
+printf("%s\t\t\t%s\t\t\t\t\t%s\t%s\n", nombre, Apellidos, Edad, Identificador);
+
 }
 }
 void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
