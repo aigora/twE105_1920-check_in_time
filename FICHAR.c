@@ -6,7 +6,7 @@ char apellido2[50];
 int edad;
 int identificador;
 }empleado;
-void fichar();
+void fichar(int a, FILE *p);
 void agr_emp(empleado nuevo);
 void list_emp();
 void con_hoy();
@@ -14,6 +14,7 @@ void con_sem();
 
 int main()
 {
+	system ("color 70");
 	int opcion;//variable que almacena la opcion elegida por el usuario 
 	do//Se ejecuta el menu principal una vez y mientras la opcion que el usuario elija no sea correcta
 	{
@@ -28,7 +29,7 @@ int main()
 	switch (opcion)//en funcion de la opcion elegida se realizan las distintas opciones
 	{
 		case 1:
-			int identificador;
+			int ident;
 			FILE *pf=fopen("pruebas.txt", "r");
 			printf("Has seleccionado la opcion de fichar, a continuacion se abrira el fichero de empleados.\n");
 			if(pf==NULL)
@@ -42,11 +43,11 @@ int main()
 				return 0;
 			}
 			printf("Introduce el numero de identificador:\n");
-			scanf("%d", &identificador);
-			if(identificador=!pf)
+			scanf("%d", &ident);
+			if(ident=!pf)
 			printf("No se encuentra al trabajador introducido.\n");
 			else
-				fichar(identificador, pf);
+				fichar(ident, pf);
 			break;
 		case 2:
 			printf("Has seleccionado la opcion agregar empleado,\n");
