@@ -132,14 +132,9 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 		printf("\nIntroduzca su segundo apellido:	");
 		scanf("%s", nuevo[0].apellido2);
 		printf("\nIntroduzca su edad:	");
-		scanf("%s", &nuevo[0].edad);
+		scanf("%d", &nuevo[0].edad);
 		printf("\nIntroduzca su numero de identificacion:	");
-		scanf("%s", &nuevo[0].identificador);	
-		fprintf(pf,"%s ", nuevo[0].nombre);//se almacenan todos los datos de ese empleado en una única línea
-		fprintf(pf,"%s ", nuevo[0].apellido1);
-		fprintf(pf,"%s ", nuevo[0].apellido2);
-		fprintf(pf,"%s ", nuevo[0].edad);
-		fprintf(pf,"%s \n", nuevo[0].identificador);
+		scanf("%d", &nuevo[0].identificador);	
 		fprintf(pf,"\nNombre: %s", nuevo[0].nombre);//Se escriben todos los datos del empleado en una misma línea
 		fprintf(pf,"	Primer apellido: %s", nuevo[0].apellido1);
 		fprintf(pf,"	Segundo apellido: %s", nuevo[0].apellido2);
@@ -154,7 +149,6 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 		{
 		
 			FILE *pf = fopen("pruebas.txt","a");//Se abre para añadir los datos de nuevos empleados
-			{
 				printf("\nIntroduzca el nombre del nuevo empleado:  	 ");//se le solicitan los datos del nuevo empleado al usuario
 				scanf("%s", nuevo[i+1].nombre);
 				printf("\nIntroduzca su primer apellido:	");
@@ -172,7 +166,7 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 				fprintf(pf,"%s \n", nuevo[i+1].identificador);
 		    	fclose(pf); // Cerramos fichero
 			}
-	}
+	
 }
 	free(nuevo);//Liberamos el puntero-vector
 }
