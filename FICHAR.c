@@ -103,7 +103,7 @@ int main()
 			{
 			
 			char op3;
-			do
+			do 
 			{
 				printf("Si desea consultar la lista de empleados pulse e, en caso contrario pulse s:\n");
 				scanf("%c",&op3);
@@ -123,7 +123,7 @@ int main()
 				char op4;
 				do
 				{
-					 printf("Si desea consultar los datos de hoy pulse h de lo contrario pulse s:\n");
+					printf("Si desea consultar los datos de hoy pulse h de lo contrario pulse s:\n");
 					scanf("%c", &op4);
 					switch(op4)
 					{
