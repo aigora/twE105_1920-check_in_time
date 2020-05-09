@@ -10,8 +10,7 @@ int edad;
 int identificador;
 } empleado;
 
-void fichar();//funcion activada por el usuario cuando elige la opcion fichar.
-void fichar(int a, FILE *p);
+void fichar(int a, FILE *p, char b);
 void agr_emp(empleado *nuevo, int N);
 void list_emp();
 void con_hoy();
@@ -20,6 +19,8 @@ void con_sem();
 
 int main()
 {
+	empleado *nuevo;
+	int num;
 	system ("color 70");
 	int opcion;//variable que almacena la opcion elegida por el usuario 
 	do//Se ejecuta el menu principal una vez y mientras la opcion que el usuario elija no sea correcta
@@ -36,33 +37,36 @@ int main()
 	switch (opcion)//en funcion de la opcion elegida se realizan las distintas opciones
 	{
 		case 1:;
-			int ident;
+			int ident,j ;
+			char hora;
 			FILE *pf=fopen("pruebas.txt", "r");
 			printf("Has seleccionado la opcion de fichar, a continuacion se abrira el fichero de empleados.\n");
 			if(pf==NULL)
 			{
 				printf("Error al abrir el fichero.\n");
-				return -1;
 			}
 			else
 			{
 				printf("El fichero se ha abierto correctamente.\n");
-				return 0;
 			}
 			printf("Introduce el numero de identificador:\n");
 			scanf("%d", &ident);
-			if(ident=!pf)
+			for(j=0;j<num;j++)
+			{
+			if(ident=!nuevo[j].identificador)
 			printf("No se encuentra al trabajador introducido.\n");
 			else
-				fichar(ident, pf);
+				printf("Introduce la hora con formato HH:MM.\n");
+				scanf("%c", hora);
+				fichar(ident, pf, hora);
+		}
 			break;
 		case 2:;
-			int m, num;
+			int m;
 			printf("Has seleccionado la opcion agregar empleado,\n");
 			printf("Seleccione el numero de empleados.\n");
 			scanf("%d", &num);
-			empleado *nuevo;
-			agr_emp (nuevo, num);//Se incia la funcion agregar empleadp
+			agr_emp (nuevo, num);//Se incia la funcion agregar empleado
 			break;
 		case 3:
 			list_emp ();
@@ -84,18 +88,12 @@ int main()
 	return 0;
 }
 
-void fichar(int a, FILE *p)//funcion activada por el usuario cuando elige la opcion fichar.
+void fichar(int a, FILE *p, char b)//funcion activada por el usuario cuando elige la opcion fichar.
 {
 	p=fopen("hoja_fichar.txt","r");
 		if (p == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
 	{
-		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en él
-		fprintf(p,"	NUEVO MES:\n");
-		fprintf(p,"Identificador: %d", a);//se escribe el numero de identificador
-		printf("Introduce la hora con formato HH:MM :\n");
-		char hora;
-		fprintf(p, "Hora: %c", hora);//se escribe la hora
-	    fclose(p); // Cerramos fichero
+		printf("Error al abrir el fichero.");
 	}
 	else//en caso de que el archivo ya exista
 	{
@@ -103,9 +101,7 @@ void fichar(int a, FILE *p)//funcion activada por el usuario cuando elige la opc
 		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en él
 		fprintf(p,"	NUEVO MES:\n");
 		fprintf(p,"Identificador: %d", a);//se escribe el numero de identificador
-		printf("Introduce la hora con formato HH:MM :\n");
-		char hora;
-		fprintf(p, "Hora: %c", hora);//se escribe la hora
+		fprintf(p, "Hora: %c", b);//se escribe la hora
 	    fclose(p); // Cerramos fichero
 		}
 }
@@ -123,52 +119,27 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 	FILE * pf = fopen("pruebas.txt", "r");//se intenta abrir el archivo que almacena los datos de los empleados
 	if (pf == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
 	{
-		pf = fopen("pruebas.txt", "w");//se abra el archivo para escribir en él
-		fprintf(pf,"	LISTA DE EMPLEADOS:");
-		printf("\nIntroduzca el nombre del empleado: 	");//se le piden los datos del empleado al usuario para almacenarlos en el archivo
-		scanf("%s", nuevo[0].nombre);
-		printf("\nIntroduzca su primer apellido:	");
-		scanf("%s", nuevo[0].apellido1);
-		printf("\nIntroduzca su segundo apellido:	");
-		scanf("%s", nuevo[0].apellido2);
-		printf("\nIntroduzca su edad:	");
-		scanf("%d", &nuevo[0].edad);
-		printf("\nIntroduzca su numero de identificacion:	");
-		scanf("%d", &nuevo[0].identificador);	
-		fprintf(pf,"%s ", nuevo[0].nombre);//se almacenan todos los datos de ese empleado en una única línea
-		fprintf(pf,"%s ", nuevo[0].apellido1);
-		fprintf(pf,"%s ", nuevo[0].apellido2);
-		fprintf(pf,"%d ", nuevo[0].edad);
-		fprintf(pf,"%d \n", nuevo[0].identificador);
-		fprintf(pf,"\nNombre: %s", nuevo[0].nombre);//Se escriben todos los datos del empleado en una misma línea
-		fprintf(pf,"	Primer apellido: %s", nuevo[0].apellido1);
-		fprintf(pf,"	Segundo apellido: %s", nuevo[0].apellido2);
-		fprintf(pf,"	Edad: %d", nuevo[0].edad);
-		fprintf(pf,"	Identificador: %d", nuevo[0].identificador);
-		fclose(pf); // Cerramos fichero
+		printf("Error al abrir el fichero,\n");
 	}
 
 	else//en caso de que el archivo ya exista
 	{
-		for(i=0;i<N;i++)
-		{
+
 		
-			FILE *pf = fopen("pruebas.txt","a");//Se abre para añadir los datos de nuevos empleados
-				printf("\nIntroduzca el nombre del nuevo empleado:  	 ");//se le solicitan los datos del nuevo empleado al usuario
-				scanf("%s", nuevo[i+1].nombre);
-				printf("\nIntroduzca su primer apellido:	");
-				scanf("%s", nuevo[i+1].apellido1);
-				printf("\nIntroduzca su segundo apellido:  	 ");
-				scanf("%s", nuevo[i+1].apellido2);
+			FILE *pf = fopen("pruebas.txt","w");//Se abre para añadir los datos de nuevos empleados
+			for(i=0;i<N;i++)
+			{
+				printf("\nIntroduzca el nombre del nuevo empleado: ");//se le solicitan los datos del nuevo empleado al usuario
+				scanf("%s", nuevo[i].nombre);
+				printf("\nIntroduzca su primer apellido: ");
+				scanf("%s", nuevo[i].apellido1);
+				printf("\nIntroduzca su segundo apellido: ");
+				scanf("%s", nuevo[i].apellido2);
 				printf("Introduzca su edad:	");
-				scanf("%s", &nuevo[i+1].edad);
+				scanf("%d", &nuevo[i].edad);
 				printf("Introduzca su numero de identificacion:	");
-				scanf("%s", &nuevo[i+1].identificador);	
-				fprintf(pf,"%s ", nuevo[i].nombre);//se almacenan todos los datos de ese empleado en una única línea
-				fprintf(pf,"%s ", nuevo[i+1].apellido1);
-				fprintf(pf,"%s ", nuevo[i+1].apellido2);
-				fprintf(pf,"%s ", nuevo[i+1].edad);
-				fprintf(pf,"%s \n", nuevo[i+1].identificador);
+				scanf("%d", &nuevo[i].identificador);	
+				fprintf(pf,"%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
 		    	fclose(pf); // Cerramos fichero
 			}
 	
