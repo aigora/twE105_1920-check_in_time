@@ -135,6 +135,11 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 		scanf("%d", &nuevo[0].edad);
 		printf("\nIntroduzca su numero de identificacion:	");
 		scanf("%d", &nuevo[0].identificador);	
+		fprintf(pf,"%s ", nuevo[0].nombre);//se almacenan todos los datos de ese empleado en una única línea
+		fprintf(pf,"%s ", nuevo[0].apellido1);
+		fprintf(pf,"%s ", nuevo[0].apellido2);
+		fprintf(pf,"%d ", nuevo[0].edad);
+		fprintf(pf,"%d \n", nuevo[0].identificador);
 		fprintf(pf,"\nNombre: %s", nuevo[0].nombre);//Se escriben todos los datos del empleado en una misma línea
 		fprintf(pf,"	Primer apellido: %s", nuevo[0].apellido1);
 		fprintf(pf,"	Segundo apellido: %s", nuevo[0].apellido2);
