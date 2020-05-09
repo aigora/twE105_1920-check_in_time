@@ -36,9 +36,10 @@ int main()
 	scanf("%d", &opcion);// se guarda la opcion elegida por el usuario en una variable
 	switch (opcion)//en funcion de la opcion elegida se realizan las distintas opciones
 	{
-		case 1:;
+		case 1:
+			{
 			int ident,j ;
-			char hora;
+			char hora, op1;
 			FILE *pf=fopen("pruebas.txt", "r");
 			printf("Has seleccionado la opcion de fichar, a continuacion se abrira el fichero de empleados.\n");
 			if(pf==NULL)
@@ -49,42 +50,113 @@ int main()
 			{
 				printf("El fichero se ha abierto correctamente.\n");
 			}
-			printf("Introduce el numero de identificador:\n");
-			scanf("%d", &ident);
-			for(j=0;j<num;j++)
+			do
 			{
-			if(ident=!nuevo[j].identificador)
-			printf("No se encuentra al trabajador introducido.\n");
-			else
-				printf("Introduce la hora con formato HH:MM.\n");
-				scanf("%c", hora);
-				fichar(ident, pf, hora);
+			printf("Seleccione fichar(f) o salir (s):\n");
+			scanf("%c", &op1);
+			switch(op1)
+			{
+				case 'f':
+				{
+					printf("Introduce el numero de identificador:\n");
+					scanf("%d", &ident);
+					for(j=0;j<num;j++)
+					{
+					if(ident=!nuevo[j].identificador)
+					printf("No se encuentra al trabajador introducido.\n");
+					else
+					{
+						printf("Introduce la hora con formato HH:MM.\n");
+						scanf("%c", hora);
+						fichar(ident, pf, hora);
+					}
+					}
+				}
+			}
+			}	
+		while(op1!='s');
 		}
 			break;
-		case 2:;
+		case 2:
+			{
 			int m;
-			printf("Has seleccionado la opcion agregar empleado,\n");
-			printf("Seleccione el numero de empleados.\n");
-			scanf("%d", &num);
-			agr_emp (nuevo, num);//Se incia la funcion agregar empleado
+			char op2;
+			printf("Has seleccionado la opcion agregar empleado\n");
+			do
+			{
+			printf("Seleccione continuar(c) o salir(s):\n");
+			scanf("%c", &op2);
+			switch(op2)
+			{
+				case 'c':
+					{
+						printf("Seleccione el numero de empleados.\n");
+						scanf("%d", &num);
+						agr_emp (nuevo, num);//Se incia la funcion agregar empleado
+					}
+			}
+			}
+			while(op2!='s');
+			}	
 			break;
 		case 3:
-			list_emp ();
+			{
+			
+			char op3;
+			do
+			{
+				printf("Si desea consultar la lista de empleados pulse e, en caso contrario pulse s:\n");
+				scanf("%c",&op3);
+				switch(op3)
+				{
+					case 'e':
+					{		
+						list_emp ();
+					}
+				}
+			}
+			while(op3!='s');
+		}
 			break;
 		case 4:
-			con_hoy();
+			{
+				char op4;
+				do
+				{
+					 printf("Si desea consultar los datos de hoy pulse h de lo contrario pulse s:\n");
+					scanf("%c", &op4);
+					switch(op4)
+					{
+						case 'h':
+						{
+							con_hoy();
+						}
+					}
+				}
+				while(op4!='s');
+			}
 			break;
 		case 5:
-			con_sem();
+			 {
+			 	char op5;
+			 	do
+			 	{
+			 		printf("Si desea consultar los datos de la semana pulse w, de lo contrario pulse s:\n");
+			 		scanf("%c",&op5);
+			 		switch(op5)
+			 		{
+			 			case 'w':
+			 				{
+			 					con_sem();
+							 }
+					 }
+				 }
+				 while(op5!='s');
+			 }
 			break;
-		case 6:
-			printf("\nSaliendo de la aplicacion");
-			return 0;
-		default://si la opcion elegida por el usuario no está recogida entre las que se les ofrece, se le informa
-			printf("El numero introducido no es correcto.\n");
 	}
 	}
-	while(opcion!=6 && opcion!=5 && opcion!=4 && opcion!=3 && opcion != 2 && opcion != 1);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menú principal
+	while(opcion!=6);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menú principal
 	return 0;
 }
 
