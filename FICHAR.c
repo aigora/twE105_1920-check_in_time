@@ -92,7 +92,30 @@ int main()
 					{
 						printf("Seleccione el numero de empleados.\n");
 						scanf("%d", &num);
+						int i ;
+						nuevo=malloc(sizeof(int)*num);
+						//Se comprueba si malloc ha funcionado
+						//El vector tiene N elementos
+						if(nuevo==NULL)
+						{
+							printf("Error: memoria no disponible.\n");
+							exit(-1);
+						}
+						for(i=0;i<num;i++)
+						{
+							printf("\nIntroduzca el nombre del nuevo empleado: ");//se le solicitan los datos del nuevo empleado al usuario
+							scanf("%s", nuevo[i].nombre);
+							printf("\nIntroduzca su primer apellido: ");
+							scanf("%s", nuevo[i].apellido1);
+							printf("\nIntroduzca su segundo apellido: ");
+							scanf("%s", nuevo[i].apellido2);
+							printf("Introduzca su edad:	");
+							scanf("%d", &nuevo[i].edad);
+							printf("Introduzca su numero de identificacion:	");
+							scanf("%d", &nuevo[i].identificador);
+						}
 						agr_emp (nuevo, num);//Se incia la funcion agregar empleado
+						free(nuevo);//Liberamos el puntero-vector
 					}
 			}
 			}
@@ -111,7 +134,11 @@ int main()
 				{
 					case 'e':
 					{		
-						list_emp ();
+						int n;
+						for(n=0;n<num;n++)
+						{
+							printf("%s \t %s \t %s \t %d \t %d \n", nuevo[n].nombre, nuevo[n].apellido1, nuevo[n].apellido2, nuevo[n].edad, nuevo[n].identificador);
+						}
 					}
 				}
 			}
@@ -179,45 +206,25 @@ void fichar(int a, FILE *p, char b)//funcion activada por el usuario cuando elig
 }
 void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando elige la opcion agregar empleado.
 {
-	int m, i ;
-	nuevo=malloc(sizeof(int)*N);
-	//Se comprueba si malloc ha funcionado
-	//El vector tiene N elementos
-	if(nuevo==NULL)
-	{
-		printf("Error: memoria no disponible.\n");
-		exit(-1);
-	}
-	FILE * pf = fopen("pruebas.txt", "r");//se intenta abrir el archivo que almacena los datos de los empleados
-	if (pf == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
-	{
-		printf("Error al abrir el fichero,\n");
-	}
-
-	else//en caso de que el archivo ya exista
-	{
-
-		
-			FILE *pf = fopen("pruebas.txt","w");//Se abre para añadir los datos de nuevos empleados
-			for(i=0;i<N;i++)
-			{
-				printf("\nIntroduzca el nombre del nuevo empleado: ");//se le solicitan los datos del nuevo empleado al usuario
-				scanf("%s", nuevo[i].nombre);
-				printf("\nIntroduzca su primer apellido: ");
-				scanf("%s", nuevo[i].apellido1);
-				printf("\nIntroduzca su segundo apellido: ");
-				scanf("%s", nuevo[i].apellido2);
-				printf("Introduzca su edad:	");
-				scanf("%d", &nuevo[i].edad);
-				printf("Introduzca su numero de identificacion:	");
-				scanf("%d", &nuevo[i].identificador);	
-				fprintf(pf,"%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
-		    	fclose(pf); // Cerramos fichero
+				int i;
+				FILE * pf = fopen("pruebas.txt", "r");//se intenta abrir el archivo que almacena los datos de los empleados
+				if (pf == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
+				{
+					printf("Error al abrir el fichero,\n");
+				}
+							
+				else//en caso de que el archivo ya exista
+				{				
+				FILE *pf = fopen("pruebas.txt","w");//Se abre para añadir los datos de nuevos empleados
+				for(i=0;i<N;i++)
+				{
+					fprintf(pf,"%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
+		    	}
+				fclose(pf); // Cerramos fichero
 			}
 	
 }
-	free(nuevo);//Liberamos el puntero-vector
-}
+
 void list_emp()//funcion activada por el usuario cuando elige la opcion lista de empleados
 {
 FILE *pf = fopen("pruebas.txt","r");
