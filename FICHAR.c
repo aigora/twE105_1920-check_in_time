@@ -10,7 +10,7 @@ int edad;
 int identificador;
 } empleado;
 
-void fichar(int a, FILE *p, char b);
+void fichar(int a, FILE *p, char b[7]);
 void agr_emp(empleado *nuevo, int N);
 void list_emp();
 void con_hoy();
@@ -39,7 +39,7 @@ int main()
 		case 1:
 			{
 			int ident,j ;
-			char hora, op1;
+			char hora[7], op1;
 			FILE *pf=fopen("pruebas.txt", "r");
 			printf("Has seleccionado la opcion de fichar, a continuacion se abrira el fichero de empleados.\n");
 			if(pf==NULL)
@@ -63,11 +63,13 @@ int main()
 					for(j=0;j<num;j++)
 					{
 					if(ident=!nuevo[j].identificador)
+					{
 					printf("No se encuentra al trabajador introducido.\n");
+					}
 					else
 					{
 						printf("Introduce la hora con formato HH:MM.\n");
-						scanf("%c", hora);
+						scanf("%s", hora);
 						fichar(ident, pf, hora);
 					}
 					}
@@ -187,7 +189,7 @@ int main()
 	return 0;
 }
 
-void fichar(int a, FILE *p, char b)//funcion activada por el usuario cuando elige la opcion fichar.
+void fichar(int a, FILE *p, char b[7])//funcion activada por el usuario cuando elige la opcion fichar.
 {
 	p=fopen("hoja_fichar.txt","r");
 		if (p == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
@@ -200,7 +202,7 @@ void fichar(int a, FILE *p, char b)//funcion activada por el usuario cuando elig
 		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en él
 		fprintf(p,"	NUEVO MES:\n");
 		fprintf(p,"Identificador: %d", a);//se escribe el numero de identificador
-		fprintf(p, "Hora: %c", b);//se escribe la hora
+		fprintf(p, "Hora: %s", b[7]);//se escribe la hora
 	    fclose(p); // Cerramos fichero
 		}
 }
