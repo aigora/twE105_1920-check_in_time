@@ -28,7 +28,7 @@ int main()
 	printf("	MENU PRINCIPAL\n");//Se muestra el menu principal y las diferentes opciones.
 	printf("Bienvenido a nuestro sistema de fichado del personal de la empresa, para comenzar seleccione una de las siguientes opciones:\n");
 	printf("\n- Pulse 1 para fichar.");
-	printf("\n- Pulse 2 para agregar un empleado.");//Luego poner que haga falta un código para las labores de gerente
+	printf("\n- Pulse 2 para agregar un empleado.");//Luego poner que haga falta un cÃ³digo para las labores de gerente
 	printf("\n- Pulse 3 para ver la lista de empleados.");
 	printf("\n- Pulse 4 para consultar los datos de hoy.");
 	printf("\n- Pulse 5 para consultar los datos de esta semana.");
@@ -75,6 +75,7 @@ int main()
 					}
 				}
 			}
+			system("cls");
 			}	
 		while(op1!='s');
 		}
@@ -120,13 +121,13 @@ int main()
 						free(nuevo);//Liberamos el puntero-vector
 					}
 			}
+			system("cls");
 			}
 			while(op2!='s');
 			}	
 			break;
 		case 3:
 			{
-			
 			char op3;
 			do 
 			{
@@ -145,6 +146,7 @@ int main()
 				}
 			}
 			while(op3!='s');
+			system("cls");
 		}
 			break;
 		case 4:
@@ -163,6 +165,7 @@ int main()
 					}
 				}
 				while(op4!='s');
+				system("cls");
 			}
 			break;
 		case 5:
@@ -185,7 +188,7 @@ int main()
 			break;
 	}
 	}
-	while(opcion!=6);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menú principal
+	while(opcion!=6);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menÃº principal
 	return 0;
 }
 
@@ -199,7 +202,7 @@ void fichar(int a, FILE *p, char b[7])//funcion activada por el usuario cuando e
 	else//en caso de que el archivo ya exista
 	{
 
-		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en él
+		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en Ã©l
 		fprintf(p,"	NUEVO MES:\n");
 		fprintf(p,"Identificador: %d", a);//se escribe el numero de identificador
 		fprintf(p, "Hora: %s", b[7]);//se escribe la hora
@@ -217,10 +220,10 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 							
 				else//en caso de que el archivo ya exista
 				{				
-				FILE *pf = fopen("pruebas.txt","w");//Se abre para añadir los datos de nuevos empleados
+				FILE *pf = fopen("pruebas.txt","w");//Se abre para aÃ±adir los datos de nuevos empleados
 				for(i=0;i<N;i++)
 				{
-					fprintf(pf,"%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
+					fprintf(pf,"%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una Ãºnica lÃ­nea
 		    	}
 				fclose(pf); // Cerramos fichero
 			}
@@ -232,7 +235,7 @@ void list_emp()//funcion activada por el usuario cuando elige la opcion lista de
 FILE *pf = fopen("pruebas.txt","r");
 int  i=0, s=5, veces=0, v;
 char nombre[30], apellido1[30], apellido2[30], Apellidos[60], Edad[2], Identificador[3];
-printf("\nNombre\t\tApellidos\t\t\tEdad\tNº de identificacion\n\n");
+printf("\nNombre\t\tApellidos\t\t\tEdad\tNÂº de identificacion\n\n");
 while(fscanf(pf, "%20s %20s %20s %20s %20s", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
 strcpy(Apellidos, apellido1); 
 strcat(Apellidos, " "); 
