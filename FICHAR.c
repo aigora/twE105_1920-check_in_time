@@ -45,7 +45,7 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 							
 				else//en caso de que el archivo ya exista
 				{				
-				FILE *pf = fopen("pruebas.txt","w");//Se abre para añadir los datos de nuevos empleados
+				FILE *pf = fopen("pruebas.txt","a");//Se abre para añadir los datos de nuevos empleados
 				for(i=0;i<N;i++)
 				{
 					fprintf(pf,"%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
