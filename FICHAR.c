@@ -15,7 +15,74 @@ void agr_emp(empleado *nuevo, int N);
 void list_emp();
 void con_hoy();
 void con_sem();
+
+
+void fichar(int a, FILE *p, char b[7])//funcion activada por el usuario cuando elige la opcion fichar.
+{
+	p=fopen("hoja_fichar.txt","r");
+		if (p == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
+	{
+		printf("Error al abrir el fichero.");
+	}
+	else//en caso de que el archivo ya exista
+	{
+
+		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en él
+		fprintf(p,"	NUEVO MES:\n");
+		fprintf(p,"Identificador: %d", a);//se escribe el numero de identificador
+		fprintf(p, "Hora: %s", b[7]);//se escribe la hora
+	    fclose(p); // Cerramos fichero
+		}
+}
+void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando elige la opcion agregar empleado.
+{
+				int i;
+				FILE * pf = fopen("pruebas.txt", "r");//se intenta abrir el archivo que almacena los datos de los empleados
+				if (pf == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
+				{
+					printf("Error al abrir el fichero,\n");
+				}
+							
+				else//en caso de que el archivo ya exista
+				{				
+				FILE *pf = fopen("pruebas.txt","a");//Se abre para añadir los datos de nuevos empleados
+				for(i=0;i<N;i++)
+				{
+					fprintf(pf,"%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
+		    	}
+				fclose(pf); // Cerramos fichero
+			}
 	
+}
+
+void list_emp()//funcion activada por el usuario cuando elige la opcion lista de empleados
+{
+FILE *pf = fopen("pruebas.txt","r");
+int  i=0, s=5, veces=0, v;
+char nombre[30], apellido1[30], apellido2[30], Apellidos[60], Edad[2], Identificador[3];
+printf("\nNombre\t\tApellidos\t\t\tEdad\tNº de identificacion\n\n");
+while(fscanf(pf, "%20s %20s %20s %20s %20s", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
+strcpy(Apellidos, apellido1); 
+strcat(Apellidos, " "); 
+strcat(Apellidos, apellido2); 
+
+
+printf("\nNombre\t\tApellidos\t\tEdad\t\tN de identificacion\n");
+printf("");
+
+printf("%s\t\t\t%s\t\t\t\t\t%s\t%s\n", nombre, Apellidos, Edad, Identificador);
+
+}
+}
+void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
+{
+	printf("\n Funcion consultar hoy");
+}
+void con_sem()//funcion activada por el usuario cuando elige la opcion consultar los datos de la semana.
+{
+	printf("\n Funcion consultar semana");
+}
+
 
 int main()
 {
@@ -75,10 +142,10 @@ int main()
 					}
 				}
 			}
-			system("cls");
 			}	
 		while(op1!='s');
 		}
+			system("cls");		
 			break;
 		case 2:
 			{
@@ -96,7 +163,7 @@ int main()
 						printf("Seleccione el numero de empleados.\n");
 						scanf("%d", &num);
 						int i ;
-						nuevo=malloc(sizeof(int)*num);
+						nuevo=malloc(sizeof(empleado)*num);
 						//Se comprueba si malloc ha funcionado
 						//El vector tiene N elementos
 						if(nuevo==NULL)
@@ -107,16 +174,17 @@ int main()
 						for(i=0;i<num;i++)
 						{
 							printf("\nIntroduzca el nombre del nuevo empleado: ");//se le solicitan los datos del nuevo empleado al usuario
-							scanf("%s", nuevo[i].nombre);
+							scanf(" %49[^\n]", nuevo[i].nombre);
 							printf("\nIntroduzca su primer apellido: ");
-							scanf("%s", nuevo[i].apellido1);
+							scanf(" %49[^\n]", nuevo[i].apellido1);
 							printf("\nIntroduzca su segundo apellido: ");
-							scanf("%s", nuevo[i].apellido2);
+							scanf(" %49[^\n]", nuevo[i].apellido2);
 							printf("Introduzca su edad:	");
 							scanf("%d", &nuevo[i].edad);
 							printf("Introduzca su numero de identificacion:	");
-							scanf("%d", &nuevo[i].identificador);
+							scanf("%d", &nuevo[i].identificador);	
 						}
+						
 						agr_emp (nuevo, num);//Se incia la funcion agregar empleado
 						free(nuevo);//Liberamos el puntero-vector
 					}
@@ -191,71 +259,5 @@ int main()
 	}
 	while(opcion!=6);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menú principal
 	return 0;
-}
-
-void fichar(int a, FILE *p, char b[7])//funcion activada por el usuario cuando elige la opcion fichar.
-{
-	p=fopen("hoja_fichar.txt","r");
-		if (p == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
-	{
-		printf("Error al abrir el fichero.");
-	}
-	else//en caso de que el archivo ya exista
-	{
-
-		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en él
-		fprintf(p,"	NUEVO MES:\n");
-		fprintf(p,"Identificador: %d", a);//se escribe el numero de identificador
-		fprintf(p, "Hora: %s", b[7]);//se escribe la hora
-	    fclose(p); // Cerramos fichero
-		}
-}
-void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando elige la opcion agregar empleado.
-{
-				int i;
-				FILE * pf = fopen("pruebas.txt", "r");//se intenta abrir el archivo que almacena los datos de los empleados
-				if (pf == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
-				{
-					printf("Error al abrir el fichero,\n");
-				}
-							
-				else//en caso de que el archivo ya exista
-				{				
-				FILE *pf = fopen("pruebas.txt","w");//Se abre para añadir los datos de nuevos empleados
-				for(i=0;i<N;i++)
-				{
-					fprintf(pf,"%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
-		    	}
-				fclose(pf); // Cerramos fichero
-			}
-	
-}
-
-void list_emp()//funcion activada por el usuario cuando elige la opcion lista de empleados
-{
-FILE *pf = fopen("pruebas.txt","r");
-int  i=0, s=5, veces=0, v;
-char nombre[30], apellido1[30], apellido2[30], Apellidos[60], Edad[2], Identificador[3];
-printf("\nNombre\t\tApellidos\t\t\tEdad\tNº de identificacion\n\n");
-while(fscanf(pf, "%20s %20s %20s %20s %20s", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
-strcpy(Apellidos, apellido1); 
-strcat(Apellidos, " "); 
-strcat(Apellidos, apellido2); 
-
-
-printf("\nNombre\t\tApellidos\t\tEdad\t\tN de identificacion\n");
-printf("");
-
-printf("%s\t\t\t%s\t\t\t\t\t%s\t%s\n", nombre, Apellidos, Edad, Identificador);
-
-}
-}
-void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
-{
-	printf("\n Funcion consultar hoy");
-}
-void con_sem()//funcion activada por el usuario cuando elige la opcion consultar los datos de la semana.
-{
-	printf("\n Funcion consultar semana");
 }
 
