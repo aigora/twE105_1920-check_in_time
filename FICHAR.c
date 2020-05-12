@@ -197,7 +197,6 @@ int main()
 		case 3:
 			{
 			char op3;
-			system("cls");
 			printf("Si desea consultar la lista de empleados pulse e, en caso contrario pulse s:\n");
 			scanf("%c",&op3);
 				if(op3=='e'){
@@ -214,6 +213,7 @@ int main()
 				printf("no ha introducido un valor valido");
 			
 				}
+				system("cls");
 				}
 			
 				break;
