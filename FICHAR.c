@@ -48,7 +48,7 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 				FILE *pf = fopen("pruebas.txt","a");//Se abre para añadir los datos de nuevos empleados
 				for(i=0;i<N;i++)
 				{
-					fprintf(pf,"%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
+					fprintf(pf,"-%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
 		    	}
 				fclose(pf); // Cerramos fichero
 			}
@@ -104,9 +104,12 @@ int main()
 	switch (opcion)//en funcion de la opcion elegida se realizan las distintas opciones
 	{
 		case 1:
+			
 			{
 			int ident,j ;
 			char hora[7], op1;
+			int i, nLineas = 0;
+			char x; // Variable auxiliar
 			FILE *pf=fopen("pruebas.txt", "r");
 			printf("Has seleccionado la opcion de fichar, a continuacion se abrira el fichero de empleados.\n");
 			if(pf==NULL)
@@ -125,6 +128,17 @@ int main()
 			{
 				case 'f':
 				{
+			while (fscanf(pf, " %c", &x) != EOF)
+			{
+			//Si lo le�do es un salto de l�nea
+			if (x == '-')
+			{
+				printf("\nFunciona");
+			//incrementamos el contador
+			++nLineas;
+			}
+			}
+			printf(" \n%i", nLineas);
 					printf("Introduce el numero de identificador:\n");
 					scanf("%d", &ident);
 					for(j=0;j<num;j++)
