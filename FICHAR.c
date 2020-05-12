@@ -163,7 +163,7 @@ int main()
 						printf("Seleccione el numero de empleados.\n");
 						scanf("%d", &num);
 						int i ;
-						nuevo=malloc(sizeof(int)*num);
+						nuevo=malloc(sizeof(empleado)*num);
 						//Se comprueba si malloc ha funcionado
 						//El vector tiene N elementos
 						if(nuevo==NULL)
@@ -174,16 +174,17 @@ int main()
 						for(i=0;i<num;i++)
 						{
 							printf("\nIntroduzca el nombre del nuevo empleado: ");//se le solicitan los datos del nuevo empleado al usuario
-							scanf("%s", nuevo[i].nombre);
+							scanf(" %49[^\n]", nuevo[i].nombre);
 							printf("\nIntroduzca su primer apellido: ");
-							scanf("%s", nuevo[i].apellido1);
+							scanf(" %49[^\n]", nuevo[i].apellido1);
 							printf("\nIntroduzca su segundo apellido: ");
-							scanf("%s", nuevo[i].apellido2);
+							scanf(" %49[^\n]", nuevo[i].apellido2);
 							printf("Introduzca su edad:	");
 							scanf("%d", &nuevo[i].edad);
 							printf("Introduzca su numero de identificacion:	");
-							scanf("%d", &nuevo[i].identificador);
+							scanf("%d", &nuevo[i].identificador);	
 						}
+						
 						agr_emp (nuevo, num);//Se incia la funcion agregar empleado
 						free(nuevo);//Liberamos el puntero-vector
 					}
