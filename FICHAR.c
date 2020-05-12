@@ -211,25 +211,25 @@ int main()
 		case 3:
 			{
 			char op3;
+			do
+			{
 			printf("Si desea consultar la lista de empleados pulse e, en caso contrario pulse s:\n");
 			scanf("%c",&op3);
-				if(op3=='e'){
-				
+			switch(op3)
+				{
+				case 'e':
+					{
 						int n;
 						for(n=0;n<num;n++)
 							{
 							printf("%s \t %s \t %s \t %d \t %d \n", nuevo[n].nombre, nuevo[n].apellido1, nuevo[n].apellido2, nuevo[n].edad, nuevo[n].identificador);
 							}
-						}
-				else if (op3=='s'){
-				return(opcion);}
-				else {
-				printf("no ha introducido un valor valido");
-			
+					}
 				}
 				system("cls");
-				}
-			
+			}
+			while(op3!='s');
+				}	
 				break;
 				
 		case 4:
