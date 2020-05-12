@@ -4,8 +4,8 @@
 
 typedef struct{//Estructura que almacena los datos de cada empleado. Icluye nombre, apellidos, edad y un numero identificador de la empresa
 char nombre[50];
-char apellido1[50];	
-char apellido2[50];
+char apellido1[30];	
+char apellido2[30];
 int edad;
 int identificador;
 } empleado;
@@ -58,19 +58,20 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 void list_emp()//funcion activada por el usuario cuando elige la opcion lista de empleados
 {
 FILE *pf = fopen("pruebas.txt","r");
-int  i=0, s=5, veces=0, v;
-char nombre[30], apellido1[30], apellido2[30], Apellidos[60], Edad[2], Identificador[3];
-printf("\nNombre\t\tApellidos\t\t\tEdad\tNÂº de identificacion\n\n");
-while(fscanf(pf, "%20s %20s %20s %20s %20s", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
+int  i=0;
+char nombre[50], apellido1[30], apellido2[30], Apellidos[60];
+int Edad[2], Identificador[3];
+printf("\n Nombre\t\tApellidos\t\tEdad\tNº de identificacion\n\n");
+while(fscanf(pf, "%50s %30s %30s %d %d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
 strcpy(Apellidos, apellido1); 
 strcat(Apellidos, " "); 
 strcat(Apellidos, apellido2); 
 
 
-printf("\nNombre\t\tApellidos\t\tEdad\t\tN de identificacion\n");
-printf("");
 
-printf("%s\t\t\t%s\t\t\t\t\t%s\t%s\n", nombre, Apellidos, Edad, Identificador);
+
+
+printf(" %s\t\t%s\t\t%d\t%d\n", nombre, Apellidos, Edad, Identificador);
 
 }
 }
@@ -213,21 +214,22 @@ int main()
 			char op3;
 			do
 			{
+			system("cls");
 			printf("Si desea consultar la lista de empleados pulse e, en caso contrario pulse s:\n");
 			scanf("%c",&op3);
 			switch(op3)
 				{
 				case 'e':
 					{
-						int n;
-						for(n=0;n<num;n++)
-							{
-							printf("%s \t %s \t %s \t %d \t %d \n", nuevo[n].nombre, nuevo[n].apellido1, nuevo[n].apellido2, nuevo[n].edad, nuevo[n].identificador);
+					list_emp();
+							
 							}
+				getch();
+				system("cls");
 					}
 				}
-				system("cls");
-			}
+			
+			
 			while(op3!='s');
 				}	
 				break;
