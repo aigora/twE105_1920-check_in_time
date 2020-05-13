@@ -3,4 +3,7 @@ Jorge	 	 	 19 	 54580
  nicolas	 castro	 garcia	 19 	 1234
  abel	 dominguez	 valladolid	 19 	 2345
  -Prueba	 num	 cienmil	 12 	 21
+ -Nombre	 apellido	 otro	 23 	 2323
+ -Ahora	 Hya	 espacio	 32 	 4322
+ -Y	 res	 ds	 43 	 5423
  

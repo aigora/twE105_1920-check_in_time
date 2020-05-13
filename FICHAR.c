@@ -17,30 +17,93 @@ int numeros;
 
 empleados *empl;
 
-void fichar(int a, FILE *p, char b[7]);
 void agr_emp(empleado *nuevo, int N);
 void list_emp();
 void con_hoy();
 void con_sem();
 
 
-void fichar(int a, FILE *p, char b[7])//funcion activada por el usuario cuando elige la opcion fichar.
-{
-	p=fopen("hoja_fichar.txt","r");
-		if (p == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
-	{
-		printf("Error al abrir el fichero.");
+void vaciar(char temp []){
+	int i;
+	
+	for(i=0;i<50;i++){
+		temp[i]='\0';
 	}
-	else//en caso de que el archivo ya exista
-	{
-
-		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en ÃƒÂ©l
-		fprintf(p,"	NUEVO MES:\n");
-		fprintf(p,"Identificador: %d", a);//se escribe el numero de identificador
-		fprintf(p, "Hora: %s", b[7]);//se escribe la hora
-	    fclose(p); // Cerramos fichero
-		}
 }
+
+void copiar (char temp[], int i){//esta funcion sirve para 
+//meter el contenido de la variable temp dentro del string dinámico nombre
+	int N = strlen(temp)+1;//Primero reservamos espacio al string dinamico 
+	//nombre. Sumamos uno para tener en cuenta el '\0'
+	empl[i].nombres = (char*)malloc(N*sizeof(char));
+	if (empl[i].nombres==NULL){
+		printf("\nNo se ha podido reservar memoria");
+		exit(1);
+	}
+	strcpy(empl[i].nombres, temp);
+}
+
+
+void fichar (){
+	int nLineas=0, l, b, var, hora, minutos;
+	char x, aux, temp[50];
+	FILE *fp;
+	FILE *cp;
+	fp = fopen ("auxiliar.txt","r");
+	cp = fopen ("hoja_fichar.txt","a");
+	if (fp==NULL){
+		printf("No se ha podido abrir el fichero.Cierre el programa\n");
+	}
+	
+/*Ahora,a partir de aquí y hasta el siguiente comentario estamos sacando el 
+número de linea que hay en el fichero*/	
+	while (fscanf(fp, " %c", &x) != EOF)
+			{
+			//Si lo leído es un salto de línea
+			if (x == '-')
+			{
+			++nLineas;			//incrementamos el contador
+			}
+			}
+			printf(" \nNumero de empleados: %i\n", nLineas);
+/*Aquí acabamos de contar el número de línea*/
+	rewind(fp);//Ponemos el cursor al inicio del fichero
+	
+	empl = (empleados*)malloc(nLineas*sizeof(empleados));//Reservamos la memoria
+	if(empl==NULL){
+		printf("\n No se ha podido reservar la memoria\nCierre el programa");
+	}
+	/*Ahora vamos a leer el nombre*/
+	for (l=0; !feof(fp); l++){
+		vaciar(temp);
+		aux='0';
+		for (b=0; aux!='-'; b++){
+			aux=fgetc(fp);
+			if(aux!='-'){
+				temp[b] = aux;
+			}
+		}
+		copiar(temp, l);
+		
+		fgets(temp,6,fp);	
+		empl[l].numeros = atoi(temp);
+		printf("\nNombre: %s. Numero de identificacion: %i", empl[l].nombres, empl[l].numeros);
+	}
+	printf("\nIntroduzca un numero de identificacion: ");
+	scanf("%i", &var);
+	for(l=0; l<nLineas; l++){
+		if(empl[l].numeros==var){
+		printf("\nCoincidencia: El numero de identificacion: %i corresponde al empleado con el nombre: %s\n", empl[l].numeros, empl[l].nombres);
+		printf("\nBienvenido %s, introduzca la hora:\n",  empl[l].nombres);
+		scanf("%i",&hora);
+		printf("\nGracias, %s introduzca los minutos:\n",  empl[l].nombres);
+		scanf("%i", &minutos);
+		fprintf(cp,"El empleado: %s con numero de identificacion: %i ha fichado a las %i:%i\n", empl[l].nombres,empl[l].numeros, hora, minutos);
+		}	
+	}
+}
+
+
 void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando elige la opcion agregar empleado.
 {
 				int i;
@@ -63,9 +126,10 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 				for(i=0;i<N;i++)
 				{
 					fprintf(pf,"-%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una ÃƒÂºnica lÃƒÂ­nea
-					fprintf(fp,"%s-%d\n ", nuevo[i].nombre,nuevo[i].identificador);	    	
+					fprintf(fp,"\n%s-%d", nuevo[i].nombre,nuevo[i].identificador);	    	
 			}
 				fclose(pf); // Cerramos fichero
+				fclose(fp);			
 			}
 	
 }
@@ -121,62 +185,16 @@ int main()
 	switch (opcion)//en funcion de la opcion elegida se realizan las distintas opciones
 	{
 		case 1:
-			
 			{
-			int ident,j ;
-			char hora[7], op1;
-			int i, nLineas = 0;
-			char x; // Variable auxiliar
-			FILE *pf=fopen("pruebas.txt", "r");
-			printf("Has seleccionado la opcion de fichar, a continuacion se abrira el fichero de empleados.\n");
-			if(pf==NULL)
-			{
-				printf("Error al abrir el fichero.\n");
+			int sal;
+			do{
+				fichar();
+				printf("\nInserte 1 si desea salir. Inserte cualquier otro numero para continuar: ");
+				scanf("%i",&sal);
+				system("cls");
 			}
-			else
-			{
-				printf("El fichero se ha abierto correctamente.\n");
+			while (sal!=1);
 			}
-			do
-			{
-			printf("Seleccione fichar(f) o salir (s):\n");
-			scanf("%c", &op1);
-			switch(op1)
-			{
-				case 'f':
-				{
-			while (fscanf(pf, " %c", &x) != EOF)
-			{
-			//Si lo leÃ­do es un salto de lÃ­nea
-			if (x == '-')
-			{
-				printf("\nFunciona");
-			//incrementamos el contador
-			++nLineas;
-			}
-			}
-			printf(" \n%i", nLineas);
-					printf("Introduce el numero de identificador:\n");
-					scanf("%d", &ident);
-					for(j=0;j<num;j++)
-					{
-					if(ident=!nuevo[j].identificador)
-					{
-					printf("No se encuentra al trabajador introducido.\n");
-					}
-					else
-					{
-						printf("Introduce la hora con formato HH:MM.\n");
-						scanf("%s", hora);
-						fichar(ident, pf, hora);
-					}
-					}
-				}
-			}
-			}	
-		while(op1!='s');
-		}
-			system("cls");		
 			break;
 		case 2:
 			{
@@ -212,7 +230,7 @@ int main()
 							scanf(" %49[^\n]", nuevo[i].apellido2);
 							printf("Introduzca su edad:	");
 							scanf("%d", &nuevo[i].edad);
-							printf("Introduzca su numero de identificacion:	");
+							printf("Introduzca su numero de identificacion (numero de cuatro cifras):	");
 							scanf("%d", &nuevo[i].identificador);	
 						}
 						

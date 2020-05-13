@@ -1,0 +1,2 @@
+El empleado: Nombre con numero de identificacion: 2323 ha fichado a las 13:54
+El empleado: Ahora con numero de identificacion: 4322 ha fichado a las 14:31
