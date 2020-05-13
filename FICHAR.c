@@ -10,6 +10,13 @@ int edad;
 int identificador;
 } empleado;
 
+typedef struct{
+char *nombres;
+int numeros;
+}empleados;
+
+empleados *empl;
+
 void fichar(int a, FILE *p, char b[7]);
 void agr_emp(empleado *nuevo, int N);
 void list_emp();
@@ -27,7 +34,7 @@ void fichar(int a, FILE *p, char b[7])//funcion activada por el usuario cuando e
 	else//en caso de que el archivo ya exista
 	{
 
-		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en él
+		p = fopen("hoja_fichar.txt", "w");//se abra el archivo para escribir en Ã©l
 		fprintf(p,"	NUEVO MES:\n");
 		fprintf(p,"Identificador: %d", a);//se escribe el numero de identificador
 		fprintf(p, "Hora: %s", b[7]);//se escribe la hora
@@ -37,22 +44,31 @@ void fichar(int a, FILE *p, char b[7])//funcion activada por el usuario cuando e
 void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando elige la opcion agregar empleado.
 {
 				int i;
+				FILE * fp = fopen("auxiliar.txt", "r");
 				FILE * pf = fopen("pruebas.txt", "r");//se intenta abrir el archivo que almacena los datos de los empleados
 				if (pf == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
 				{
-					printf("Error al abrir el fichero,\n");
+					printf("Error al abrir el fichero de empleados\n");
 				}
 							
 				else//en caso de que el archivo ya exista
-				{				
-				FILE *pf = fopen("pruebas.txt","a");//Se abre para añadir los datos de nuevos empleados
+				{
+				if (pf == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
+				{
+					printf("Error al abrir el fichero de auxiliar de fichar\n");
+				} 
+				else{					
+				FILE *pf = fopen("pruebas.txt","a");//Se abre para aÃ±adir los datos de nuevos empleados
+				FILE *fp = fopen("auxiliar.txt","a");
 				for(i=0;i<N;i++)
 				{
-					fprintf(pf,"-%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una única línea
-		    	}
+					fprintf(pf,"-%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una Ãºnica lÃ­nea
+					fprintf(fp,"%s-%d\n ", nuevo[i].nombre,nuevo[i].identificador);	    	
+			}
 				fclose(pf); // Cerramos fichero
 			}
 	
+}
 }
 
 void list_emp()//funcion activada por el usuario cuando elige la opcion lista de empleados
@@ -61,7 +77,7 @@ FILE *pf = fopen("pruebas.txt","r");
 int  i=0;
 char nombre[50], apellido1[30], apellido2[30], Apellidos[60];
 int Edad[2], Identificador[3];
-printf("\n Nombre\t\tApellidos\t\tEdad\tN� de identificacion\n\n");
+printf("\n Nombre\t\tApellidos\t\tEdad\tNº de identificacion\n\n");
 while(fscanf(pf, "%50s %30s %30s %d %d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
 strcpy(Apellidos, apellido1); 
 strcat(Apellidos, " "); 
@@ -96,7 +112,7 @@ int main()
 	printf("	MENU PRINCIPAL\n");//Se muestra el menu principal y las diferentes opciones.
 	printf("Bienvenido a nuestro sistema de fichado del personal de la empresa, para comenzar seleccione una de las siguientes opciones:\n");
 	printf("\n- Pulse 1 para fichar.");
-	printf("\n- Pulse 2 para agregar un empleado.");//Luego poner que haga falta un código para las labores de gerente
+	printf("\n- Pulse 2 para agregar un empleado.");//Luego poner que haga falta un cÃ³digo para las labores de gerente
 	printf("\n- Pulse 3 para ver la lista de empleados.");
 	printf("\n- Pulse 4 para consultar los datos de hoy.");
 	printf("\n- Pulse 5 para consultar los datos de esta semana.");
@@ -131,7 +147,7 @@ int main()
 				{
 			while (fscanf(pf, " %c", &x) != EOF)
 			{
-			//Si lo le�do es un salto de l�nea
+			//Si lo leído es un salto de línea
 			if (x == '-')
 			{
 				printf("\nFunciona");
@@ -273,7 +289,7 @@ int main()
 			break;
 	}
 	}
-	while(opcion!=6);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menú principal
+	while(opcion!=6);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menÃº principal
 	return 0;
 }
 
