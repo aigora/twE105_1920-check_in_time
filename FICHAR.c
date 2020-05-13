@@ -15,7 +15,6 @@ char *nombres;
 int numeros;
 }empleados;
 
-empleados *empl;
 
 void agr_emp(empleado *nuevo, int N);
 void list_emp();
@@ -31,7 +30,7 @@ void vaciar(char temp []){
 	}
 }
 
-void copiar (char temp[], int i){//esta funcion sirve para 
+void copiar (char temp[], int i, empleados *empl){//esta funcion sirve para 
 //meter el contenido de la variable temp dentro del string dinámico nombre
 	int N = strlen(temp)+1;//Primero reservamos espacio al string dinamico 
 	//nombre. Sumamos uno para tener en cuenta el '\0'
@@ -45,6 +44,7 @@ void copiar (char temp[], int i){//esta funcion sirve para
 
 
 void fichar (){
+	empleados *empl;
 	int nLineas=0, l, b, var, hora, minutos;
 	char x, aux, temp[50];
 	FILE *fp;
@@ -83,7 +83,7 @@ número de linea que hay en el fichero*/
 				temp[b] = aux;
 			}
 		}
-		copiar(temp, l);
+		copiar(temp, l, empl);
 		
 		fgets(temp,6,fp);	
 		empl[l].numeros = atoi(temp);
