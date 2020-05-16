@@ -56,7 +56,7 @@ void fichar (){
 	}
 	
 /*Ahora,a partir de aquí y hasta el siguiente comentario estamos sacando el 
-número de linea que hay en el fichero*/	
+número de lineas que hay en el fichero*/	
 	while (fscanf(fp, " %c", &x) != EOF)
 			{
 			//Si lo leído es un salto de línea
@@ -121,11 +121,11 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 					printf("Error al abrir el fichero de auxiliar de fichar\n");
 				} 
 				else{					
-				FILE *pf = fopen("pruebas.txt","a");//Se abre para aÃƒÂ±adir los datos de nuevos empleados
+				FILE *pf = fopen("pruebas.txt","a");//Se abre para ñadir los datos de nuevos empleados
 				FILE *fp = fopen("auxiliar.txt","a");
 				for(i=0;i<N;i++)
 				{
-					fprintf(pf,"-%s\t %s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una ÃƒÂºnica lÃƒÂ­nea
+					fprintf(pf,"-%s\t%s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una ÃƒÂºnica lÃƒÂ­nea
 					fprintf(fp,"\n%s-%d", nuevo[i].nombre,nuevo[i].identificador);	    	
 			}
 				fclose(pf); // Cerramos fichero
@@ -139,10 +139,10 @@ void list_emp()//funcion activada por el usuario cuando elige la opcion lista de
 {
 FILE *pf = fopen("pruebas.txt","r");
 int  i=0;
-char nombre[50], apellido1[30], apellido2[30], Apellidos[60];
-int Edad[2], Identificador[3];
-printf("\n Nombre\t\tApellidos\t\tEdad\tNÂº de identificacion\n\n");
-while(fscanf(pf, "%50s %30s %30s %d %d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
+char nombre[20], apellido1[20], apellido2[20], Apellidos[40];
+int Edad[2], Identificador[4];
+printf("\n Nombre\t\tApellidos\t\tEdad\tN de identificacion\n\n");
+while(fscanf(pf, "%20s %20s %20s %d %d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
 strcpy(Apellidos, apellido1); 
 strcat(Apellidos, " "); 
 strcat(Apellidos, apellido2); 
@@ -151,7 +151,7 @@ strcat(Apellidos, apellido2);
 
 
 
-printf(" %s\t\t%s\t\t%d\t%d\n", nombre, Apellidos, Edad, Identificador);
+printf("%s\t\t%s\t\t%d\t%d\n", nombre, Apellidos, Edad, Identificador);
 
 }
 }
