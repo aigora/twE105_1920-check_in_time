@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+
+
+
+
 
 typedef struct{//Estructura que almacena los datos de cada empleado. Icluye nombre, apellidos, edad y un numero identificador de la empresa
 char nombre[50];
@@ -125,7 +130,7 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 				FILE *fp = fopen("auxiliar.txt","a");
 				for(i=0;i<N;i++)
 				{
-					fprintf(pf,"-%s\t%s\t %s\t %d \t %d\n ", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una Ãºnica lÃ­nea
+					fprintf(pf,"-%s\t%s\t%s\t%d\t%d\n", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una Ãºnica lÃ­nea
 					fprintf(fp,"\n%s-%d", nuevo[i].nombre,nuevo[i].identificador);	    	
 			}
 				fclose(pf); // Cerramos fichero
@@ -142,13 +147,10 @@ int  i=0;
 char nombre[20], apellido1[20], apellido2[20], Apellidos[40];
 int Edad[2], Identificador[4];
 printf("\n Nombre\t\tApellidos\t\tEdad\tN de identificacion\n\n");
-while(fscanf(pf, "%20s %20s %20s %d %d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
+while(fscanf(pf, "%20s\t%20s\t%20\t%d\t%d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
 strcpy(Apellidos, apellido1); 
 strcat(Apellidos, " "); 
 strcat(Apellidos, apellido2); 
-
-
-
 
 
 printf("%s\t\t%s\t\t%d\t%d\n", nombre, Apellidos, Edad, Identificador);
@@ -157,22 +159,30 @@ printf("%s\t\t%s\t\t%d\t%d\n", nombre, Apellidos, Edad, Identificador);
 }
 void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
 {
-	printf("\n Funcion consultar hoy");
+	
+	printf("\nHoy han fichado:\n");
 }
 void con_sem()//funcion activada por el usuario cuando elige la opcion consultar los datos de la semana.
 {
-	printf("\n Funcion consultar semana");
+	printf("\nEsta semana han fichado:\n");
+	
 }
 
 
 int main()
 {
+	time_t tiempo = time(0);
+	struct tm *tlocal = localtime(&tiempo);
+	char fecha[128];
+	strftime(fecha,128,"%a %d/%m/%y %H:%M:%S ",tlocal);
+	
 	empleado *nuevo;
 	int num;
 	system ("color 70");
 	int opcion;//variable que almacena la opcion elegida por el usuario 
 	do//Se ejecuta el menu principal una vez y mientras la opcion que el usuario elija no sea correcta
 	{
+	printf("%s\n\n", fecha);
 	printf("	MENU PRINCIPAL\n");//Se muestra el menu principal y las diferentes opciones.
 	printf("Bienvenido a nuestro sistema de fichado del personal de la empresa, para comenzar seleccione una de las siguientes opciones:\n");
 	printf("\n- Pulse 1 para fichar.");
@@ -271,14 +281,49 @@ int main()
 		case 4:
 			{
 				char op4;
+				system("cls");
+				printf("Si desea consultar los datos de hoy pulse h de lo contrario pulse s:\n");
 				do
 				{
-					printf("Si desea consultar los datos de hoy pulse h de lo contrario pulse s:\n");
+					
+					
 					scanf("%c", &op4);
 					switch(op4)
 					{
 						case 'h':
 						{
+					system("cls");
+					char fechaNum[50];
+				    strftime(fechaNum,50," %d/%m/%y ",tlocal);
+					char diasem[2];
+					int nDiasem;
+				    strftime(diasem,2,"%w",tlocal);
+				    nDiasem=(diasem[0])&&48;
+				    switch (nDiasem)
+				        {
+				        	case 0:
+				        		printf("Domingo ");
+				        		break;
+				        	case 1:
+				        		printf("Lunes ");
+				        		break;
+				        	case 2:
+				        		printf("Martes ");
+				        		break;
+				        	case 3:
+				        		printf("Miercoles ");
+				        		break;
+				        	case 4:
+				        		printf("Jueves ");
+				        		break;
+				        	case 5:
+				        		printf("Viernes ");
+				        		break;
+				        	case 6:
+				        		printf("Sabado ");
+				        		break;
+						}
+						printf("%s\n",fechaNum);
 							con_hoy();
 						}
 					}
