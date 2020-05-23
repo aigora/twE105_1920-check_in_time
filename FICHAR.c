@@ -8,11 +8,11 @@
 
 
 typedef struct{//Estructura que almacena los datos de cada empleado. Icluye nombre, apellidos, edad y un numero identificador de la empresa
-char nombre[50];
-char apellido1[30];	
-char apellido2[30];
-int edad;
-int identificador;
+char nombre[20];
+char apellido1[20];	
+char apellido2[20];
+char edad;
+char identificador;
 } empleado;
 
 typedef struct{
@@ -128,10 +128,16 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 				else{					
 				FILE *pf = fopen("pruebas.txt","a");//Se abre para �adir los datos de nuevos empleados
 				FILE *fp = fopen("auxiliar.txt","a");
+				
+			time_t tiempo = time(0);
+			struct tm *tlocal = localtime(&tiempo);
+			char fecha[50];
+			strftime(fecha,50,"%a %d/%m/%y %H:%M:%S ",tlocal);
+				
 				for(i=0;i<N;i++)
 				{
-					fprintf(pf,"-%s\t%s\t%s\t%d\t%d\n", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una Ãºnica lÃ­nea
-					fprintf(fp,"\n%s-%d", nuevo[i].nombre,nuevo[i].identificador);	    	
+					fprintf(pf,"-%s %s %s %d %d\n", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una Ãºnica lÃ­nea
+					fprintf(fp,"%s %s-%d",fecha[50], nuevo[i].nombre,nuevo[i].identificador);	    	
 			}
 				fclose(pf); // Cerramos fichero
 				fclose(fp);			
@@ -147,13 +153,13 @@ int  i=0;
 char nombre[20], apellido1[20], apellido2[20], Apellidos[40];
 int Edad[2], Identificador[4];
 printf("\n Nombre\t\tApellidos\t\tEdad\tN de identificacion\n\n");
-while(fscanf(pf, "%20s\t%20s\t%20\t%d\t%d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
+while(fscanf(pf, "%s %s %s %s %s", nombre, apellido1,apellido2 ,Edad ,Identificador )!= EOF ){
 strcpy(Apellidos, apellido1); 
 strcat(Apellidos, " "); 
 strcat(Apellidos, apellido2); 
 
 
-printf("%s\t\t%s\t\t%d\t%d\n", nombre, Apellidos, Edad, Identificador);
+printf("%s\t\t%s\t\t%s\t%s\n", nombre, Apellidos, Edad, Identificador);
 
 }
 }
@@ -173,8 +179,8 @@ int main()
 {
 	time_t tiempo = time(0);
 	struct tm *tlocal = localtime(&tiempo);
-	char fecha[128];
-	strftime(fecha,128,"%a %d/%m/%y %H:%M:%S ",tlocal);
+	char fecha[50];
+	strftime(fecha,50,"%a %d/%m/%y %H:%M:%S ",tlocal);
 	
 	empleado *nuevo;
 	int num;
