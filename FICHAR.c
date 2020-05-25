@@ -141,9 +141,9 @@ void list_emp()//funcion activada por el usuario cuando elige la opcion lista de
 FILE *pf = fopen("pruebas.txt","r");
 int  i=0;
 char nombre[50], apellido1[30], apellido2[30], Apellidos[60];
-int Edad[2], Identificador[4];
-printf("\n Nombre\t\tApellidos\t\tEdad\tNÂº de identificacion\n\n");
-while(fscanf(pf, "%50s %30s %30s %d %d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
+int Edad[1], Identificador[1];
+printf("\nNombre y Apellidos (Edad)-->N de identificacion\n\n");
+while(fscanf(pf, "%s %s %s %d %d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
 strcpy(Apellidos, apellido1); 
 strcat(Apellidos, " "); 
 strcat(Apellidos, apellido2); 
@@ -152,7 +152,7 @@ strcat(Apellidos, apellido2);
 
 
 
-printf("%s\t\t%s\t\t%d\t%d\n", nombre, Apellidos, Edad, Identificador);
+printf("%s %s (%d años)-->%d\n", nombre, Apellidos, Edad[0], Identificador[0]);
 
 }
 }
