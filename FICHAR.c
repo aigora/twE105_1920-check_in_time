@@ -361,7 +361,7 @@ int main()
 							//bccc base de cotizacion por contingencias comunes bccp base de cotizacion por contingencias profesionales
 							//dev es el total devengado ded es el total a deducir
 							//aport son las aportaciones
-							printf("Este es un simulador del salario de un empleado, la informacion es aproximada.");
+							printf("Este es un simulador del salario de un empleado,\n la informacion es aproximada.");
 							printf("Seleccione el departamento al que pertenece cada trabajador:\n DEPARTAMENTO 1\tDEPARTAMENTO 2\tDEPARTAMENTO 3\tDEPARTAMENTO 4\tDEPARTAMENTO 5\t ");
 							scanf("%d", &dep);
 							switch(dep)
