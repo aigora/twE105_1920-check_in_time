@@ -351,7 +351,7 @@ int main()
 				do
 				{
 					printf("Si desea calcular el salario aproximado pulse c, de lo contrario pulse s:\n");
-					scanf("%c",&op6);
+					scanf(" %c",&op6);
 					switch(op6)
 					{
 						case 'c':
