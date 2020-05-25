@@ -109,7 +109,7 @@ n�mero de lineas que hay en el fichero*/
 }
 
 
-void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando elige la opcion agregar empleado.
+void agr_emp(empleado *nuevo, int N )//funcion activada por el usuario cuando elige la opcion agregar empleado.
 {
 				int i;
 				FILE * fp = fopen("auxiliar.txt", "r");
@@ -131,13 +131,12 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 				
 			time_t tiempo = time(0);
 			struct tm *tlocal = localtime(&tiempo);
-			char fecha[50];
-			strftime(fecha,50,"%a %d/%m/%y %H:%M:%S ",tlocal);
-				
+		
+			
 				for(i=0;i<N;i++)
 				{
 					fprintf(pf,"-%s %s %s %d %d\n", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una Ãºnica lÃ­nea
-					fprintf(fp,"%s %s-%d",fecha[50], nuevo[i].nombre,nuevo[i].identificador);	    	
+					fprintf(fp,"%02d/%02d/%d %s-%d",tlocal->tm_mday, tlocal->tm_mon +1,tlocal->tm_year+1900, nuevo[i].nombre,nuevo[i].identificador);	    	
 			}
 				fclose(pf); // Cerramos fichero
 				fclose(fp);			
