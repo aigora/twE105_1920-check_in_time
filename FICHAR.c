@@ -11,8 +11,8 @@ typedef struct{//Estructura que almacena los datos de cada empleado. Icluye nomb
 char nombre[20];
 char apellido1[20];	
 char apellido2[20];
-char edad;
-char identificador;
+int edad;
+int identificador;
 } empleado;
 
 typedef struct{
@@ -136,7 +136,7 @@ void agr_emp(empleado *nuevo, int N )//funcion activada por el usuario cuando el
 				for(i=0;i<N;i++)
 				{
 					fprintf(pf,"-%s %s %s %d %d\n", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una Ãºnica lÃ­nea
-					fprintf(fp,"%02d/%02d/%d %s-%d",tlocal->tm_mday, tlocal->tm_mon +1,tlocal->tm_year+1900, nuevo[i].nombre,nuevo[i].identificador);	    	
+					fprintf(fp,"%02d/%02d/%d %s-%d\n",tlocal->tm_mday, tlocal->tm_mon +1,tlocal->tm_year+1900, nuevo[i].nombre,nuevo[i].identificador);	    	
 			}
 				fclose(pf); // Cerramos fichero
 				fclose(fp);			
@@ -203,6 +203,8 @@ int main()
 		case 1:
 			{
 			int sal;
+			system("cls");
+			printf("Has seleccionado la opcion de fichar");
 			do{
 				fichar();
 				printf("\nInserte 1 si desea salir. Inserte cualquier otro numero para continuar: ");
