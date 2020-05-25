@@ -3,14 +3,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-
-
-
 typedef struct{//Estructura que almacena los datos de cada empleado. Icluye nombre, apellidos, edad y un numero identificador de la empresa
-char nombre[20];
-char apellido1[20];	
-char apellido2[20];
+char nombre[50];
+char apellido1[30];	
+char apellido2[30];
 int edad;
 int identificador;
 } empleado;
@@ -25,7 +21,7 @@ void agr_emp(empleado *nuevo, int N);
 void list_emp();
 void con_hoy();
 void con_sem();
-
+float calcular_salario();
 
 void vaciar(char temp []){
 	int i;
@@ -61,7 +57,7 @@ void fichar (){
 	}
 	
 /*Ahora,a partir de aquí y hasta el siguiente comentario estamos sacando el 
-número de lineas que hay en el fichero*/	
+número de linea que hay en el fichero*/	
 	while (fscanf(fp, " %c", &x) != EOF)
 			{
 			//Si lo leído es un salto de línea
@@ -109,7 +105,7 @@ número de lineas que hay en el fichero*/
 }
 
 
-void agr_emp(empleado *nuevo, int N )//funcion activada por el usuario cuando elige la opcion agregar empleado.
+void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando elige la opcion agregar empleado.
 {
 				int i;
 				FILE * fp = fopen("auxiliar.txt", "r");
@@ -126,17 +122,12 @@ void agr_emp(empleado *nuevo, int N )//funcion activada por el usuario cuando el
 					printf("Error al abrir el fichero de auxiliar de fichar\n");
 				} 
 				else{					
-				FILE *pf = fopen("pruebas.txt","a");//Se abre para ñadir los datos de nuevos empleados
+				FILE *pf = fopen("pruebas.txt","a");//Se abre para aÃƒÂ±adir los datos de nuevos empleados
 				FILE *fp = fopen("auxiliar.txt","a");
-				
-			time_t tiempo = time(0);
-			struct tm *tlocal = localtime(&tiempo);
-		
-			
 				for(i=0;i<N;i++)
 				{
-					fprintf(pf,"-%s %s %s %d %d\n", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una ÃƒÂºnica lÃƒÂ­nea
-					fprintf(fp,"%02d/%02d/%d %s-%d\n",tlocal->tm_mday, tlocal->tm_mon +1,tlocal->tm_year+1900, nuevo[i].nombre,nuevo[i].identificador);	    	
+					fprintf(pf,"-%s\t%s\t%s\t%d\t%d\n", nuevo[i].nombre,nuevo[i].apellido1, nuevo[i].apellido2,nuevo[i].edad,nuevo[i].identificador);//se almacenan todos los datos de ese empleado en una ÃƒÂºnica lÃƒÂ­nea
+					fprintf(fp,"\n%s-%d", nuevo[i].nombre,nuevo[i].identificador);	    	
 			}
 				fclose(pf); // Cerramos fichero
 				fclose(fp);			
@@ -149,45 +140,93 @@ void list_emp()//funcion activada por el usuario cuando elige la opcion lista de
 {
 FILE *pf = fopen("pruebas.txt","r");
 int  i=0;
-char nombre[20], apellido1[20], apellido2[20], Apellidos[40];
+char nombre[50], apellido1[30], apellido2[30], Apellidos[60];
 int Edad[2], Identificador[4];
-printf("\n Nombre\t\tApellidos\t\tEdad\tN de identificacion\n\n");
-while(fscanf(pf, "%s %s %s %s %s", nombre, apellido1,apellido2 ,Edad ,Identificador )!= EOF ){
+printf("\n Nombre\t\tApellidos\t\tEdad\tNÂº de identificacion\n\n");
+while(fscanf(pf, "%50s %30s %30s %d %d", nombre,apellido1 ,apellido2 ,Edad ,Identificador )!= EOF ){
 strcpy(Apellidos, apellido1); 
 strcat(Apellidos, " "); 
 strcat(Apellidos, apellido2); 
 
 
-printf("%s\t\t%s\t\t%s\t%s\n", nombre, Apellidos, Edad, Identificador);
+
+
+
+printf("%s\t\t%s\t\t%d\t%d\n", nombre, Apellidos, Edad, Identificador);
 
 }
 }
 void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
 {
-	
-	printf("\nHoy han fichado:\n");
+	printf("\n Funcion consultar hoy");
 }
 void con_sem()//funcion activada por el usuario cuando elige la opcion consultar los datos de la semana.
 {
-	printf("\nEsta semana han fichado:\n");
-	
+	printf("\n Funcion consultar semana");
 }
+	float calcular_salario() {
+		int numero_id[4];
+		printf("Introduzca el numero de identificacion digito a digito:\n");
+		printf("El primer digito corresponde al departamento por lo que dicho numero debe estar entre 1 y 3: ");
+		scanf("%i", &numero_id[0]);
+		printf("\nEl segundo digito corresponde a su posicion dentro del departamento por lo que tambien debe estar comprendido entre 1 y 3: ");
+		scanf("%i", &numero_id[1]);
+		printf("\nLos ultimos digitos son personales:\n");
+		scanf("%i", &numero_id[2]);
+		scanf("%i", &numero_id[3]);
+		float salariobase = 1000;
+		int horas_e; 
+		printf("Introduzca el numero de horas extra realizadas por el usuario este mes:	");
+		scanf("%d", &horas_e);
+		if (numero_id[0] = 1) {//pertenece al departamento 1
+			if (numero_id[1] = 1) {// 1 = es un jefe
+				salariobase *= 1.50; // salario con prima por ser jefe del dep1
+				salariobase += horas_e * 13;// las horas extra de este tipo de jefe
+			}
+			else {
+				salariobase *= 1.25;// si no es jefe, es empleado, con sus horas pagadas como empleado del dep 1
+				salariobase += horas_e * 10; // le añadimos las horas extra pagadas por ser empleado del dep 1
+		}
+	}
 
+		if (numero_id[0] = 2) {//pertenece al departamento 2
+			if (numero_id[1] = 1) {// 1= es un jefe
+				salariobase *= 1.60; // salario de jefe dep 2
+				salariobase += horas_e * 14; // añadimos las horas extra pagadas por ser jefe del dep2
+			}
+			else {
+				salariobase *= 1.35; // salario empleado dep 2
+				salariobase += horas_e * 11; // añadimos las horas extra pagadas por ser empleado del dep2
+			
+		}
+	}
+
+		if (numero_id[0] >= 3) {//pertenece al departamento 1
+			if (numero_id[1] = 1) {// 1= es un jefe
+				salariobase *= 1.70;// prima por ser jefe del dep 3
+				salariobase += horas_e * 16; // horas extra pagadas al precio de ser jefe del dep3
+			}
+			else {
+				salariobase *= 1.45; // empleado del dep3
+				salariobase += horas_e * 13; // horas extra por ser empleado del dep3
+			} 
+	}
+	return salariobase;
+}
 
 int main()
 {
-	time_t tiempo = time(0);
+	time_t tiempo = time (0);
 	struct tm *tlocal = localtime(&tiempo);
-	char fecha[50];
-	strftime(fecha,50,"%a %d/%m/%y %H:%M:%S ",tlocal);
-	
+	char fecha [128];
+	strftime(fecha,128,"%a %d/%m/%y %H:%M:%S", tlocal);
 	empleado *nuevo;
 	int num;
 	system ("color 70");
 	int opcion;//variable que almacena la opcion elegida por el usuario 
 	do//Se ejecuta el menu principal una vez y mientras la opcion que el usuario elija no sea correcta
 	{
-	printf("%s\n\n", fecha);
+		printf("%s\n\n", fecha);
 	printf("	MENU PRINCIPAL\n");//Se muestra el menu principal y las diferentes opciones.
 	printf("Bienvenido a nuestro sistema de fichado del personal de la empresa, para comenzar seleccione una de las siguientes opciones:\n");
 	printf("\n- Pulse 1 para fichar.");
@@ -195,7 +234,7 @@ int main()
 	printf("\n- Pulse 3 para ver la lista de empleados.");
 	printf("\n- Pulse 4 para consultar los datos de hoy.");
 	printf("\n- Pulse 5 para consultar los datos de esta semana.");
-	printf("\n- Pulse 6 para abrir el simulador de salario.");
+	printf("\n- Pulse 6 para consultar el salario de un empleado.");
 	printf("\n- Pulse 7 para salir.\n\n");
 	scanf("%d", &opcion);// se guarda la opcion elegida por el usuario en una variable
 	switch (opcion)//en funcion de la opcion elegida se realizan las distintas opciones
@@ -203,8 +242,6 @@ int main()
 		case 1:
 			{
 			int sal;
-			system("cls");
-			printf("Has seleccionado la opcion de fichar");
 			do{
 				fichar();
 				printf("\nInserte 1 si desea salir. Inserte cualquier otro numero para continuar: ");
@@ -289,18 +326,16 @@ int main()
 		case 4:
 			{
 				char op4;
-				system("cls");
-				printf("Si desea consultar los datos de hoy pulse h de lo contrario pulse s:\n");
+				system ("cls");
+					printf("Si desea consultar los datos de hoy pulse h de lo contrario pulse s:\n");
 				do
 				{
-					
-					
 					scanf("%c", &op4);
 					switch(op4)
 					{
 						case 'h':
 						{
-					system("cls");
+							system("cls");
 					char fechaNum[50];
 				    strftime(fechaNum,50," %d/%m/%y ",tlocal);
 					char diasem[2];
@@ -358,125 +393,22 @@ int main()
 				 while(op5!='s');
 			 }
 			break;
-		case 6:
+			case 6:
 			{
-				char op6;
-				do
-				{
-					printf("Si desea calcular el salario aproximado pulse c, de lo contrario pulse s:\n");
-					scanf("%c",&op6);
-					switch(op6)
-					{
-						case 'c':
-							{
-							int dep, numh; //numh es el numero de horas extras
-							float salbase, horaextra, thx, px, bccc, bccp, dev, ded, aport, irpf, sal;//yhx es el total que le corresponde por las horas extras y px es la paga extra
-							printf("Este es un simulador del salario de un empleado, la informacion es aproximada.");
-							printf("Seleccione el departamento al que pertenece cada trabajador:\n DEPARTAMENTO 1\tDEPARTAMENTO 2\tDEPARTAMENTO 3\tDEPARTAMENTO 4\tDEPARTAMENTO 5\t ");
-							scanf("%d", &dep);
-							switch(dep)
-							{
-								case 1:
-									{
-										salbase=950.0;
-										horaextra=7.52;
-										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
-										scanf("%d",&numh);
-										thx=numh*horaextra;
-										px=salbase*2/12;
-										dev=salbase+thx;
-										bccc=dev+px;
-										bccp=bccc+thx;
-										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
-										irpf=aport*0.09;
-										ded=aport+irpf;
-										sal=dev-ded;
-										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
-										break;
-										
-									}
-								case 2:
-									{
-										salbase=995.21;
-										horaextra=8.92;
-										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
-										scanf("%d",&numh);
-										thx=numh*horaextra;
-										px=salbase*2/12;
-										dev=salbase+thx;//el total devengado es el salario base mas las horas extras
-										bccc=dev+px;
-										bccp=bccc+thx;
-										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
-										irpf=aport*0.09;
-										ded=aport+irpf;
-										sal=dev-ded;
-										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
-										break;
-									}
-								case 3:
-									{
-										salbase=1050.0;
-										horaextra=12.35;
-										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
-										scanf("%d",&numh);
-										thx=numh*horaextra;
-										px=salbase*2/12;
-										dev=salbase+thx;
-										bccc=dev+px;
-										bccp=bccc+thx;
-										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
-										irpf=aport*0.09;
-										ded=aport+irpf;
-										sal=dev-ded;
-										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
-										break;
-									}
-								case 4:
-									{
-										salbase=768.0;
-										horaextra=7.10;
-										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
-										scanf("%d",&numh);
-										thx=numh*horaextra;
-										px=salbase*2/12;
-										dev=salbase+thx;
-										bccc=dev+px;
-										bccp=bccc+thx;
-										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
-										irpf=aport*0.09;
-										ded=aport+irpf;
-										sal=dev-ded;
-										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
-										break;
-									}
-								case 5:
-									{
-										salbase=1568.23;
-										horaextra=13.45;
-										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
-										scanf("%d",&numh);
-										thx=numh*horaextra;
-										px=salbase*2/12;
-										dev=salbase+thx;
-										bccc=dev+px;
-										bccp=bccc+thx;
-										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
-										irpf=aport*0.09;
-										ded=aport+irpf;
-										sal=dev-ded;
-										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
-										break;
-									}
-							}
-						}
-					}
-				}
-				while(op6!='s');
-				system("cls");
+			float salario;
+			int opc6=0;
+			do {
+			system ("cls");
+			salario = calcular_salario ();
+			printf("El salario total es de:	%.2f\n", salario);
+			printf("Pulse 6 para salir, pulse cualquier otra tecla para continuar consultando salarios\n");
+			scanf("%i", &opc6);
+			}
+			while (opc6!=6);
+			system ("cls");
 			}
 	}
 	}
 	while(opcion!=7);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menÃƒÂº principal
 	return 0;
 }
-
