@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-
+/*EL CODIGO DE GERENTE ES 123*/
 typedef struct{//Estructura que almacena los datos de cada empleado. Icluye nombre, apellidos, edad y un numero identificador de la empresa
 char nombre[50];
 char apellido1[30];	
@@ -173,7 +173,7 @@ int main()
 	char fecha [128];
 	strftime(fecha,128,"%a %d/%m/%y %H:%M:%S", tlocal);
 	empleado *nuevo;
-	int num;
+	int num, codigo;
 	system ("color 70");
 	int opcion;//variable que almacena la opcion elegida por el usuario 
 	do//Se ejecuta el menu principal una vez y mientras la opcion que el usuario elija no sea correcta
@@ -182,7 +182,7 @@ int main()
 	printf("	MENU PRINCIPAL\n");//Se muestra el menu principal y las diferentes opciones.
 	printf("Bienvenido a nuestro sistema de fichado del personal de la empresa, para comenzar seleccione una de las siguientes opciones:\n");
 	printf("\n- Pulse 1 para fichar.");
-	printf("\n- Pulse 2 para agregar un empleado.");//Luego poner que haga falta un cÃ³digo para las labores de gerente
+	printf("\n- Pulse 2 para agregar un empleado.");
 	printf("\n- Pulse 3 para ver la lista de empleados.");
 	printf("\n- Pulse 4 para consultar los datos de hoy.");
 	printf("\n- Pulse 5 para consultar los datos de esta semana.");
@@ -252,6 +252,13 @@ int main()
 			break;
 		case 3:
 			{
+			printf("Introduzca el codigo de gerente\n");
+			scanf("%i", &codigo);
+			if (codigo!=123)
+			{
+				printf("CODIGO INCORRECTO");
+				exit (1);
+			}
 			char op3;
 			do
 			{
@@ -277,6 +284,13 @@ int main()
 				
 		case 4:
 			{
+				printf("Introduzca el codigo de gerente\n");
+				scanf("%i", &codigo);
+				if (codigo!=123)
+				{
+					printf("CODIGO INCORRECTO");
+					exit (1);
+				}
 				char op4;
 				system ("cls");
 					printf("Si desea consultar los datos de hoy pulse h de lo contrario pulse s:\n");
@@ -329,7 +343,14 @@ int main()
 			break;
 		case 5:
 			 {
-			 	char op5;
+				printf("Introduzca el codigo de gerente\n");
+				scanf("%i", &codigo);
+				if (codigo!=123)
+				{
+					printf("CODIGO INCORRECTO");
+					exit (1);
+				}
+				 	char op5;
 			 	do
 			 	{
 			 		printf("Si desea consultar los datos de la semana pulse w, de lo contrario pulse s:\n");
@@ -347,6 +368,13 @@ int main()
 			break;
 		case 6:
 			{
+				printf("Introduzca el codigo de gerente\n");
+				scanf("%i", &codigo);
+				if (codigo!=123)
+				{
+					printf("CODIGO INCORRECTO");
+					exit (1);
+				}
 				char op6;
 				do
 				{
