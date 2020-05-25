@@ -164,55 +164,7 @@ void con_sem()//funcion activada por el usuario cuando elige la opcion consultar
 {
 	printf("\n Funcion consultar semana");
 }
-	float calcular_salario() {
-		int numero_id[4];
-		printf("Introduzca el numero de identificacion digito a digito:\n");
-		printf("El primer digito corresponde al departamento por lo que dicho numero debe estar entre 1 y 3: ");
-		scanf("%i", &numero_id[0]);
-		printf("\nEl segundo digito corresponde a su posicion dentro del departamento por lo que tambien debe estar comprendido entre 1 y 3: ");
-		scanf("%i", &numero_id[1]);
-		printf("\nLos ultimos digitos son personales:\n");
-		scanf("%i", &numero_id[2]);
-		scanf("%i", &numero_id[3]);
-		float salariobase = 1000;
-		int horas_e; 
-		printf("Introduzca el numero de horas extra realizadas por el usuario este mes:	");
-		scanf("%d", &horas_e);
-		if (numero_id[0] = 1) {//pertenece al departamento 1
-			if (numero_id[1] = 1) {// 1 = es un jefe
-				salariobase *= 1.50; // salario con prima por ser jefe del dep1
-				salariobase += horas_e * 13;// las horas extra de este tipo de jefe
-			}
-			else {
-				salariobase *= 1.25;// si no es jefe, es empleado, con sus horas pagadas como empleado del dep 1
-				salariobase += horas_e * 10; // le añadimos las horas extra pagadas por ser empleado del dep 1
-		}
-	}
 
-		if (numero_id[0] = 2) {//pertenece al departamento 2
-			if (numero_id[1] = 1) {// 1= es un jefe
-				salariobase *= 1.60; // salario de jefe dep 2
-				salariobase += horas_e * 14; // añadimos las horas extra pagadas por ser jefe del dep2
-			}
-			else {
-				salariobase *= 1.35; // salario empleado dep 2
-				salariobase += horas_e * 11; // añadimos las horas extra pagadas por ser empleado del dep2
-			
-		}
-	}
-
-		if (numero_id[0] >= 3) {//pertenece al departamento 1
-			if (numero_id[1] = 1) {// 1= es un jefe
-				salariobase *= 1.70;// prima por ser jefe del dep 3
-				salariobase += horas_e * 16; // horas extra pagadas al precio de ser jefe del dep3
-			}
-			else {
-				salariobase *= 1.45; // empleado del dep3
-				salariobase += horas_e * 13; // horas extra por ser empleado del dep3
-			} 
-	}
-	return salariobase;
-}
 
 int main()
 {
@@ -393,19 +345,121 @@ int main()
 				 while(op5!='s');
 			 }
 			break;
-			case 6:
+		case 6:
 			{
-			float salario;
-			int opc6=0;
-			do {
-			system ("cls");
-			salario = calcular_salario ();
-			printf("El salario total es de:	%.2f\n", salario);
-			printf("Pulse 6 para salir, pulse cualquier otra tecla para continuar consultando salarios\n");
-			scanf("%i", &opc6);
-			}
-			while (opc6!=6);
-			system ("cls");
+				char op6;
+				do
+				{
+					printf("Si desea calcular el salario aproximado pulse c, de lo contrario pulse s:\n");
+					scanf("%c",&op6);
+					switch(op6)
+					{
+						case 'c':
+							{
+							int dep, numh; //numh es el numero de horas extras
+							float salbase, horaextra, thx, px, bccc, bccp, dev, ded, aport, irpf, sal;//yhx es el total que le corresponde por las horas extras y px es la paga extra
+							printf("Este es un simulador del salario de un empleado, la informacion es aproximada.");
+							printf("Seleccione el departamento al que pertenece cada trabajador:\n DEPARTAMENTO 1\tDEPARTAMENTO 2\tDEPARTAMENTO 3\tDEPARTAMENTO 4\tDEPARTAMENTO 5\t ");
+							scanf("%d", &dep);
+							switch(dep)
+							{
+								case 1:
+									{
+										salbase=950.0;
+										horaextra=7.52;
+										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
+										scanf("%d",&numh);
+										thx=numh*horaextra;
+										px=salbase*2/12;
+										dev=salbase+thx;
+										bccc=dev+px;
+										bccp=bccc+thx;
+										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
+										irpf=aport*0.09;
+										ded=aport+irpf;
+										sal=dev-ded;
+										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
+										break;
+										
+									}
+								case 2:
+									{
+										salbase=995.21;
+										horaextra=8.92;
+										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
+										scanf("%d",&numh);
+										thx=numh*horaextra;
+										px=salbase*2/12;
+										dev=salbase+thx;//el total devengado es el salario base mas las horas extras
+										bccc=dev+px;
+										bccp=bccc+thx;
+										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
+										irpf=aport*0.09;
+										ded=aport+irpf;
+										sal=dev-ded;
+										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
+										break;
+									}
+								case 3:
+									{
+										salbase=1050.0;
+										horaextra=12.35;
+										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
+										scanf("%d",&numh);
+										thx=numh*horaextra;
+										px=salbase*2/12;
+										dev=salbase+thx;
+										bccc=dev+px;
+										bccp=bccc+thx;
+										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
+										irpf=aport*0.09;
+										ded=aport+irpf;
+										sal=dev-ded;
+										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
+										break;
+									}
+								case 4:
+									{
+										salbase=768.0;
+										horaextra=7.10;
+										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
+										scanf("%d",&numh);
+										thx=numh*horaextra;
+										px=salbase*2/12;
+										dev=salbase+thx;
+										bccc=dev+px;
+										bccp=bccc+thx;
+										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
+										irpf=aport*0.09;
+										ded=aport+irpf;
+										sal=dev-ded;
+										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
+										break;
+									}
+								case 5:
+									{
+										salbase=1568.23;
+										horaextra=13.45;
+										printf("Introduce el numero de horas extras, si es que las ha realizado\n");
+										scanf("%d",&numh);
+										thx=numh*horaextra;
+										px=salbase*2/12;
+										dev=salbase+thx;
+										bccc=dev+px;
+										bccp=bccc+thx;
+										aport=bccc*0.047+bccp*0.0155+bccp*0.001;
+										irpf=aport*0.09;
+										ded=aport+irpf;
+										sal=dev-ded;
+										printf("El salario aproximado que le corresponde al empleado es %.2f €\n", sal);
+										break;
+									}
+							}
+						}
+					}
+				}
+				while(op6!='s');
+				system("cls");
 			}
 	}
 	}
