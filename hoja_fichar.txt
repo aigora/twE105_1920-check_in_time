@@ -1,4 +1,5 @@
-El empleado: Nombre con numero de identificacion: 2323 ha fichado a las 13:54
-El empleado: Ahora con numero de identificacion: 4322 ha fichado a las 14:31
-El empleado: Y con numero de identificacion: 5423 ha fichado a las 12:32
-El empleado: Ahora con numero de identificacion: 4322 ha fichado a las 23:32
+26-5 El empleado Juanito con numero de identificacion 4569 ha fichado a las 11:45
+26-5 El empleado Jorge con numero de identificacion 1112 ha fichado a las 11:45
+26-5 El empleado otra con numero de identificacion 3201 ha fichado a las 11:26
+26-5 El empleado estoes con numero de identificacion 9876 ha fichado a las 11:46
+26-5 El empleado Jose con numero de identificacion 1254 ha fichado a las 11:48

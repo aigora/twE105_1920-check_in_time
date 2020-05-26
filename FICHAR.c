@@ -46,7 +46,7 @@ void copiar (char temp[], int i, empleados *empl){//esta funcion sirve para
 
 void fichar (){
 	empleados *empl;
-	int nLineas=0, l, b, var, hora, minutos;
+	int nLineas=0, l, b, var, hora, minutos, dia, mes;
 	char x, aux, temp[50];
 	FILE *fp;
 	FILE *cp;
@@ -99,7 +99,11 @@ número de linea que hay en el fichero*/
 		scanf("%i",&hora);
 		printf("\nGracias, %s introduzca los minutos:\n",  empl[l].nombres);
 		scanf("%i", &minutos);
-		fprintf(cp,"El empleado: %s con numero de identificacion: %i ha fichado a las %i:%i\n", empl[l].nombres,empl[l].numeros, hora, minutos);
+		printf("\nIntroduzca el dia:\n");
+		scanf("%i",&dia);
+		printf("\nIntroduzca el mes:\n");
+		scanf("%i",&mes);
+		fprintf(cp,"%i-%i El empleado %s con numero de identificacion %i ha fichado a las %i:%i\n", dia, mes, empl[l].nombres,empl[l].numeros, hora, minutos);
 		}	
 	}
 }
