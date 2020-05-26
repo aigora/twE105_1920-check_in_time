@@ -10,3 +10,5 @@
 26-5 El empleado Marco con numero de identificacion 1231 ha fichado a las 16:29 (26/5)
 26-5 El empleado Abel con numero de identificacion 1234 ha fichado a las 17:40 (26/5)
 26-5 El empleado rober con numero de identificacion 1234 ha fichado a las 17:41 (26/5)
+-1199403669-0 El empleado Estefania con numero de identificacion 1258 ha fichado a las 18:32763 (-1199403669/0)
+26-5 El empleado Marco con numero de identificacion 1231 ha fichado a las 18:21 (26/5)
