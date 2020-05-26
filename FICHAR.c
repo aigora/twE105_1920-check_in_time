@@ -339,6 +339,7 @@ int main()
 	}
 	}
 	while(opcion!=7);// si el numero marcado no corresponde a ninguna opcion sevuelve a ejecutar el menu principal
+	printf("Gracias por usar nuestro software.\n");
 	return 0;
 }
 
