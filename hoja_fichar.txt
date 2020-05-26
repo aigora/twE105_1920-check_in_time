@@ -1,5 +1,5 @@
-26-5 El empleado Juanito con numero de identificacion 4569 ha fichado a las 11:45
-26-5 El empleado Jorge con numero de identificacion 1112 ha fichado a las 11:45
-26-5 El empleado otra con numero de identificacion 3201 ha fichado a las 11:26
-26-5 El empleado estoes con numero de identificacion 9876 ha fichado a las 11:46
-26-5 El empleado Jose con numero de identificacion 1254 ha fichado a las 11:48
+26-5 El empleado Jorge con numero de identificacion 1112 ha fichado a las 12:56 (26/5)
+29-5 El empleado wenceslao con numero de identificacion 1111 ha fichado a las 12:25 (29/5)
+28-3 El empleado Abel con numero de identificacion 1234 ha fichado a las 28:3 (28/3)
+26-8 El empleado rober con numero de identificacion 1234 ha fichado a las 12:23 (26/8)
+22-5 El empleado 9592 con numero de identificacion 1212 ha fichado a las 13:3 (22/5)

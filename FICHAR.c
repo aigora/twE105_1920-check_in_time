@@ -19,8 +19,8 @@ int numeros;
 
 void agr_emp(empleado *nuevo, int N);
 void list_emp();
-void con_hoy();
-void con_sem();
+void con_dia(int dia, int mes);
+void con_mes(int mes);
 float calcular_salario();
 
 void vaciar(char temp []){
@@ -103,7 +103,7 @@ número de linea que hay en el fichero*/
 		scanf("%i",&dia);
 		printf("\nIntroduzca el mes:\n");
 		scanf("%i",&mes);
-		fprintf(cp,"%i-%i El empleado %s con numero de identificacion %i ha fichado a las %i:%i\n", dia, mes, empl[l].nombres,empl[l].numeros, hora, minutos);
+		fprintf(cp,"%i-%i El empleado %s con numero de identificacion %i ha fichado a las %i:%i (%i/%i)\n", dia, mes, empl[l].nombres,empl[l].numeros, hora, minutos, dia, mes);
 		}	
 	}
 }
@@ -160,18 +160,53 @@ printf("%s %s (%d anos)-->%d\n", nombre, Apellidos, Edad[0], Identificador[0]);
 
 }
 }
-void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
+void con_dia(int dia, int mes)//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
 {
-	printf("\n Funcion consultar hoy");
-
-	FILE *fp;
-	fp = fopen ("auxiliar.txt","r");
-	fscanf(fp,"%s %s-%i");
-	
+	int aux1, aux2;
+	char linea [100];
+	FILE *cp;
+	fopen ("cp", "r");
+	cp = fopen ("hoja_fichar.txt","r");
+	fscanf(cp,"%i-%i", &aux1, &aux2);
+		if(aux1==dia&&aux2==mes)
+		{
+		printf("Lista de coincidencias:\n");
+		while(fgets(linea, 100, (FILE*) cp))
+		{
+			
+			if(aux1==dia&&aux2==mes)
+			{
+			printf("%s", linea);
+			}
+			fscanf(cp,"%i-%i", &aux1, &aux2);
+		}
+		}
+		
+	fclose (cp);
 }
-void con_sem()//funcion activada por el usuario cuando elige la opcion consultar los datos de la semana.
+void con_mes(int mes)//funcion activada por el usuario cuando elige la opcion consultar los datos de la semana.
 {
-	printf("\n Funcion consultar semana");
+	int aux1, aux2;
+	char linea [100];
+	FILE *cp;
+	fopen ("cp", "r");
+	cp = fopen ("hoja_fichar.txt","r");
+	fscanf(cp,"%i-%i", &aux1, &aux2);
+		if(aux2==mes)
+		{
+		printf("Lista de coincidencias:\n");
+		while(fgets(linea, 100, (FILE*) cp))
+		{
+			
+			if(aux2==mes)
+			{
+			printf("%s", linea);
+			}
+			fscanf(cp,"%i-%i", &aux1, &aux2);
+		}
+		}
+		
+	fclose (cp);
 }
 
 
@@ -193,8 +228,8 @@ int main()
 	printf("\n- Pulse 1 para fichar.");
 	printf("\n- Pulse 2 para agregar un empleado.");
 	printf("\n- Pulse 3 para ver la lista de empleados.");
-	printf("\n- Pulse 4 para consultar los datos de hoy.");
-	printf("\n- Pulse 5 para consultar los datos de esta semana.");
+	printf("\n- Pulse 4 para consultar los datos de un dia.");
+	printf("\n- Pulse 5 para consultar los datos de un mes.");
 	printf("\n- Pulse 6 para consultar el salario de un empleado.");
 	printf("\n- Pulse 7 para salir.\n\n");
 	scanf("%d", &opcion);// se guarda la opcion elegida por el usuario en una variable
@@ -305,47 +340,21 @@ int main()
 				}
 				char op4;
 				system ("cls");
-					printf("Si desea consultar los datos de hoy pulse h de lo contrario pulse s:\n");
+				int dia, mes;
 				do
 				{
-					scanf("%c", &op4);
+					printf("Si desea consultar los datos de un dia pulse d de lo contrario pulse s:\n");
+					scanf(" %c", &op4);
 					switch(op4)
 					{
-						case 'h':
+						case 'd':
 						{
-							system("cls");
-					char fechaNum[50];
-				    strftime(fechaNum,50," %d/%m/%y ",tlocal);
-					char diasem[2];
-					int nDiasem;
-				    strftime(diasem,2,"%w",tlocal);
-				    nDiasem=(diasem[0])&&48;
-				    switch (nDiasem)
-				        {
-				        	case 0:
-				        		printf("Domingo ");
-				        		break;
-				        	case 1:
-				        		printf("Lunes ");
-				        		break;
-				        	case 2:
-				        		printf("Martes ");
-				        		break;
-				        	case 3:
-				        		printf("Miercoles ");
-				        		break;
-				        	case 4:
-				        		printf("Jueves ");
-				        		break;
-				        	case 5:
-				        		printf("Viernes ");
-				        		break;
-				        	case 6:
-				        		printf("Sabado ");
-				        		break;
-						}
-						printf("%s\n",fechaNum);
-							con_hoy();
+						system("cls");
+						printf("Introduzca el dia:	");
+						scanf("%i", &dia);
+						printf("Introduzca el mes:	");
+						scanf("%i", &mes);
+						con_dia(dia, mes);
 						}
 					}
 				}
@@ -354,7 +363,7 @@ int main()
 			}
 			break;
 		case 5:
-			 {
+			{
 				printf("Introduzca el codigo de gerente\n");
 				scanf("%i", &codigo);
 				if (codigo!=123)
@@ -362,21 +371,27 @@ int main()
 					printf("CODIGO INCORRECTO");
 					exit (1);
 				}
-				 	char op5;
-			 	do
-			 	{
-			 		printf("Si desea consultar los datos de la semana pulse w, de lo contrario pulse s:\n");
-			 		scanf("%c",&op5);
-			 		switch(op5)
-			 		{
-			 			case 'w':
-			 				{
-			 					con_sem();
-							 }
-					 }
-				 }
-				 while(op5!='s');
-			 }
+				char op4;
+				system ("cls");
+				int mes;
+				do
+				{
+					printf("Si desea consultar los datos de un mes pulse m de lo contrario pulse s:\n");
+					scanf(" %c", &op4);
+					switch(op4)
+					{
+						case 'm':
+						{
+						system("cls");
+						printf("Introduzca el mes:	");
+						scanf("%i", &mes);
+						con_mes (mes);
+						}
+					}
+				}
+				while(op4!='s');
+				system("cls");
+			}
 			break;
 		case 6:
 			{
