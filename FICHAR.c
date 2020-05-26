@@ -152,13 +152,18 @@ strcat(Apellidos, apellido2);
 
 
 
-printf("%s %s (%d años)-->%d\n", nombre, Apellidos, Edad[0], Identificador[0]);
+printf("%s %s (%d anos)-->%d\n", nombre, Apellidos, Edad[0], Identificador[0]);
 
 }
 }
 void con_hoy()//funcion activada por el usuario cuando elige la opcion consultar los datos de hoy.
 {
 	printf("\n Funcion consultar hoy");
+
+	FILE *fp;
+	fp = fopen ("auxiliar.txt","r");
+	fscanf(fp,"%s %s-%i");
+	
 }
 void con_sem()//funcion activada por el usuario cuando elige la opcion consultar los datos de la semana.
 {
@@ -194,6 +199,9 @@ int main()
 		case 1:
 			{
 			int sal;
+			system("cls");
+			printf("Funcion fichar.");
+			
 			do{
 				fichar();
 				printf("\nInserte 1 si desea salir. Inserte cualquier otro numero para continuar: ");
