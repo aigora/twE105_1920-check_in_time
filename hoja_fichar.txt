@@ -11,3 +11,5 @@
 26-5 El empleado rober con numero de identificacion 1234 ha fichado a las 17:41 (26/5)
 26-5 El empleado Marco con numero de identificacion 1231 ha fichado a las 18:21 (26/5)
 23-9 El empleado Raul con numero de identificacion 2314 ha fichado a las 18:42 (23/9)
+34-13 El empleado Marco con numero de identificacion 1231 ha fichado a las 25:67 (34/13)
+23-11 El empleado Marco con numero de identificacion 1231 ha fichado a las 12:12 (23/11)

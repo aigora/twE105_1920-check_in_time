@@ -397,6 +397,7 @@ void fichar (){//funcion dedicada a registrar las entradas de los empleados
 	empl = (empleados*)malloc(nLineas*sizeof(empleados));//Reservamos la memoria
 	if(empl==NULL){//en caso de error
 		printf("\n No se ha podido reservar la memoria\nCierre el programa");
+		exit(-1);
 	}
 	/*Ahora vamos a leer el nombre*/
 	for (l=0; !feof(fp); l++){
@@ -418,14 +419,30 @@ void fichar (){//funcion dedicada a registrar las entradas de los empleados
 	for(l=0; l<nLineas; l++){//Se recorren todos los empleados dentro del fichero
 		if(empl[l].numeros==var){//Cuando se encuentra a quien corresponde ese numero de identificacion se piden los datos pertinentes sobre el momento en que se dicha
 		printf("\nCoincidencia: El numero de identificacion: %i corresponde al empleado con el nombre: %s\n", empl[l].numeros, empl[l].nombres);
-		printf("\nBienvenido %s, introduzca la hora:\n",  empl[l].nombres);
-		scanf("%i",&hora);
-		printf("\nGracias, %s introduzca los minutos:\n",  empl[l].nombres);
-		scanf("%i", &minutos);
-		printf("\nIntroduzca el dia:\n");
+		printf("\nBienvenido %s, introduzca la hora (de 0 a 24):\n",  empl[l].nombres);
+		do
+		{
+			scanf("%i",&hora);
+		}
+		while(hora<0||hora>24);
+		printf("\nGracias, %s introduzca los minutos (de 0 a 59):\n",  empl[l].nombres);
+		do
+		{
+		scanf("%i", &minutos);	
+		}
+		while(minutos<0||minutos>59);
+		printf("\nIntroduzca el dia (de 1 a 31):\n");
+		do
+		{
 		scanf("%i",&dia);
-		printf("\nIntroduzca el mes:\n");
-		scanf("%i",&mes);
+		}
+		while(dia<1||dia>31);
+		printf("\nIntroduzca el mes (de 1 a 12):\n");
+		do
+		{
+			scanf("%i",&mes);
+		}
+		while(mes<1||mes>12);
 		fprintf(cp,"%i-%i El empleado %s con numero de identificacion %i ha fichado a las %i:%i (%i/%i)\n", dia, mes, empl[l].nombres,empl[l].numeros, hora, minutos, dia, mes);
 		}	//Y por ultimo se escribe dicha informacion en el fichero correspondiente
 	}
@@ -442,6 +459,7 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 				if (pf == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
 				{
 					printf("Error al abrir el fichero de empleados\n");
+					exit(-1);
 				}
 							
 				else//en caso de que el archivo ya exista
@@ -449,6 +467,8 @@ void agr_emp(empleado *nuevo, int N)//funcion activada por el usuario cuando eli
 				if (pf == NULL)//si el archivo aun no existe (es el primer empleado que se agrega)
 				{
 					printf("Error al abrir el fichero de auxiliar de fichar\n");
+					exit(-1);
+				
 				} 
 				else{					
 				FILE *pf = fopen("empleados.txt","a");//Se abre para aÃ±adir los datos de nuevos empleados
